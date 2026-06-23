@@ -1,0 +1,13 @@
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Local-only agent state
+.claude.local/
+CLAUDE.local.md
+.env
+.env.*

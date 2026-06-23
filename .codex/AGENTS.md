@@ -1,0 +1,5 @@
+- Read the workspace `AGENTS.md` first, then the nearest project or subsystem `AGENTS.md`.
+- Prefer minimal diffs and the project's existing patterns.
+- For methodology-heavy work, use `.claude/AGENTIC_WORKFLOW.md` as the portable command and prompt guide.
+- Project-specific rules override this portable guidance.
+- Run relevant tests when available and report what was or was not verified.
