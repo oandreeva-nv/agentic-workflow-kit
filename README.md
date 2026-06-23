@@ -12,6 +12,7 @@ CLAUDE.md                       # Claude Code entrypoint that imports AGENTS.md
 SKILL_CATALOG.md                # explicit inventory of bundled and external skills
 .claude/AGENTIC_WORKFLOW.md     # commands, prompts, and workflow examples
 .claude/README.md               # short Claude Code orientation
+assets/claude-codex-framework-loop.svg # lifecycle diagram asset
 .agents/skills/*/SKILL.md       # bundled Codex-native skills
 .claude/skills/*/SKILL.md       # Claude Code compatibility mirror
 .codex/AGENTS.md                # Codex-specific lightweight guidance
@@ -23,7 +24,8 @@ From this repository:
 
 ```bash
 cp AGENTS.md CLAUDE.md SKILL_CATALOG.md /path/to/project/
-mkdir -p /path/to/project/.agents /path/to/project/.claude /path/to/project/.codex
+mkdir -p /path/to/project/.agents /path/to/project/.claude /path/to/project/.codex /path/to/project/assets
+cp assets/claude-codex-framework-loop.svg /path/to/project/assets/
 cp .claude/AGENTIC_WORKFLOW.md .claude/README.md /path/to/project/.claude/
 cp -R .agents/skills /path/to/project/.agents/
 cp -R .claude/skills /path/to/project/.claude/
@@ -48,93 +50,27 @@ Use this loop for framework or library work where design quality, compatibility,
 
 Phases: **Design -> Review -> Implement -> Validate -> Ship -> Reflect**
 
-```text
-PHASE: Discover / Scope
-+-----------------------------------------------------+
-| 1. [Claude] Superpowers brainstorming               |
-|    -> generate /idea-hours                          |
-+----------------------+------------------------------+
-                       |
-                       v                         [Codex]
-            +----------------------+
-            | 2. Repo/project scan |
-            +----------+-----------+
-                       |
-PHASE: Spec / Validate v
-+------------------------------------------------------+
-| 3. [Claude] DAE / framework spec                    |
-+----------------------+-------------------------------+
-                       |
-                       v                         [Codex]
-            +-------------------------------+
-            | 4. Validate spec against repo |
-            +----------+--------------------+
-                       |
-PHASE: Plan Review     v
-+------------------------------------------------------+
-| 5. [Claude] gstack /plan-eng-review                 |
-|             /plan-devex-review                      |
-+----------------------+-------------------------------+
-                       |
-+----------------------v-------------------------------+
-| 6. [Claude] Superpowers write-plans                 |
-+----------------------+-------------------------------+
-                       |
-                       v                         [Codex]
-            +---------------------------------+
-            | 7. Translate plan -> test status|
-            +----------+----------------------+
-                       |
-                       v                         [Codex]
-            +----------------------------------+
-            | 8. TDD: implement step by step   |
-            +----------+-----------------------+
-                       |
-PHASE: Implement / Checkpoint
-+----------------------v-------------------------------+
-| 9. [Claude] Review diff / checkpoint                |
-+----------------------+-------------------------------+
-                       |
-                       v                         [Codex]
-            +------------------------------+
-            | 10. Continue implementation  |
-            +----------+-------------------+
-                       |
-PHASE: Adversarial Review
-+----------------------v-------------------------------+
-| 11. [Claude] Adversarial framework review           |
-+----------------------+-------------------------------+
-                       |
-                       v                         [Codex]
-            +--------------------------------------+
-            | 12. Fix review findings             |
-            |     and run validation              |
-            +----------+---------------------------+
-                       |
-PHASE: Final Validation
-+----------------------v-------------------------------+
-| 13. [Claude] Compatibility / perf / security / docs |
-|             review                                  |
-+----------------------+-------------------------------+
-                       |
-                       v                         [Codex]
-            +------------------------------------------+
-            | 14. Final patch summary                 |
-            |     and validation evidence             |
-            +----------+-------------------------------+
-                       |
-PHASE: Ship / Learn
-+----------------------v-------------------------------+
-| 15. [Claude] gstack /ship or                        |
-|             Superpowers finish branch               |
-+----------------------+-------------------------------+
-                       |
-                       v                         [Codex]
-            +----------------------------------+
-            | 16. Reflect and update           |
-            |     AGENTS.md / skills           |
-            +----------------------------------+
-```
+![Claude + Codex Framework Development Loop](assets/claude-codex-framework-loop.svg)
+
+Text flow summary:
+
+1. **[Claude]** Superpowers brainstorming -> generate `/idea-hours`.
+2. **[Codex]** Repo/project scan.
+3. **[Claude]** DAE / framework spec.
+4. **[Codex]** Validate spec against repo.
+5. **[Claude]** gstack `/plan-eng-review` and `/plan-devex-review`.
+6. **[Claude]** Superpowers write-plans.
+7. **[Codex]** Translate plan to test status.
+8. **[Codex]** TDD implementation step by step.
+9. **[Claude]** Review diff / checkpoint.
+10. **[Codex]** Continue implementation.
+11. **[Claude]** Adversarial framework review.
+12. **[Codex]** Fix review findings and run validation.
+13. **[Claude]** Compatibility / performance / security / docs review.
+14. **[Codex]** Final patch summary and validation evidence.
+15. **[Claude]** gstack `/ship` or Superpowers finish branch.
+16. **[Codex]** Reflect and update `AGENTS.md` / skills.
+
 
 Legend:
 
