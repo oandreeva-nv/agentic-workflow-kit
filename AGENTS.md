@@ -59,4 +59,4 @@ Apply these lenses before declaring framework-level or reusable infrastructure w
 - **gstack-like review**: product challenge, architecture review, QA, security review, benchmark review, and ship readiness.
 - **Docs lookup**: use repo docs and source first. For external or fast-changing APIs, use Context7 or equivalent official-docs lookup before relying on memory.
 
-See `.claude/AGENTIC_WORKFLOW.md` for command examples and copy/paste prompts.
+See `.claude/AGENTIC_WORKFLOW.md` for command examples, `.claude/skills/*/SKILL.md` for bundled local skills, and `SKILL_CATALOG.md` for the external tool inventory.

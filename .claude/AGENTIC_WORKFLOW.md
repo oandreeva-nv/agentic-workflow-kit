@@ -9,7 +9,9 @@ Copy these files into a new project or workspace root:
 ```text
 AGENTS.md
 CLAUDE.md
+SKILL_CATALOG.md
 .claude/AGENTIC_WORKFLOW.md
+.claude/skills/*/SKILL.md
 .codex/AGENTS.md
 ```
 
@@ -23,6 +25,21 @@ Optional project-specific additions:
 ```
 
 Nearest project guidance should override this portable workflow.
+
+## Bundled Local Skills
+
+Run `/skills` in Claude Code after copying the repo into a project. Expected local skills:
+
+- `agentic-lightweight-loop`
+- `agentic-formal-feature`
+- `agentic-role-review`
+- `framework-contract-review`
+
+For Codex, reference the skill path explicitly, for example:
+
+```text
+Use .claude/skills/agentic-formal-feature/SKILL.md and AGENTS.md for this task.
+```
 
 ## Recommended Stack
 

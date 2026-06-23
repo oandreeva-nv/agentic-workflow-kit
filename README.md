@@ -9,8 +9,10 @@ The kit is intentionally project-agnostic. Copy it into a workspace or project r
 ```text
 AGENTS.md                       # portable workflow policy for coding agents
 CLAUDE.md                       # Claude Code entrypoint that imports AGENTS.md
+SKILL_CATALOG.md                # explicit inventory of bundled and external skills
 .claude/AGENTIC_WORKFLOW.md     # commands, prompts, and workflow examples
 .claude/README.md               # short Claude Code orientation
+.claude/skills/*/SKILL.md       # bundled local Claude Code skills
 .codex/AGENTS.md                # Codex-specific lightweight guidance
 ```
 
@@ -19,9 +21,10 @@ CLAUDE.md                       # Claude Code entrypoint that imports AGENTS.md
 From this repository:
 
 ```bash
-cp AGENTS.md CLAUDE.md /path/to/project/
+cp AGENTS.md CLAUDE.md SKILL_CATALOG.md /path/to/project/
 mkdir -p /path/to/project/.claude /path/to/project/.codex
 cp .claude/AGENTIC_WORKFLOW.md .claude/README.md /path/to/project/.claude/
+cp -R .claude/skills /path/to/project/.claude/
 cp .codex/AGENTS.md /path/to/project/.codex/
 ```
 
@@ -36,6 +39,19 @@ Use these as layers, not as a required sequence for every patch:
 3. **Formal feature discipline**: Superpowers or DAE-style brainstorm, ready contract, acceptance criteria, plan, TDD, review, finish.
 4. **Review and ship layer**: gstack-style product, architecture, devex, QA, security, benchmark, and release reviews.
 5. **Docs lookup**: Context7 or equivalent official-docs lookup for external or fast-changing APIs.
+
+## Bundled Local Skills
+
+This repo now includes project-local Claude Code skills:
+
+| Skill | Purpose |
+|---|---|
+| `agentic-lightweight-loop` | Routine context -> plan -> implement -> verify -> handoff loop |
+| `agentic-formal-feature` | GSD/Superpowers/DAE-style formal spec and implementation workflow |
+| `agentic-role-review` | gstack-style multi-role review and ship-readiness layer |
+| `framework-contract-review` | Framework/API compatibility, lifecycle, performance, security, docs, test matrix, and release review |
+
+See `SKILL_CATALOG.md` for the full inventory and external install notes.
 
 ## Claude Code Setup
 

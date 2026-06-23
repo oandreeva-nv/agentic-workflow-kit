@@ -10,3 +10,14 @@ AGENTS.md
 ```
 
 For project-specific skills and agents, keep them in that project's own `.claude/skills/` and `.claude/agents/` directories.
+
+## Bundled Skills
+
+This kit includes project-local Claude Code skills in `.claude/skills/`:
+
+- `agentic-lightweight-loop`
+- `agentic-formal-feature`
+- `agentic-role-review`
+- `framework-contract-review`
+
+Start Claude Code from the project root and run `/skills` to verify they were discovered.
