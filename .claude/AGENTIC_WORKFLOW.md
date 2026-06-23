@@ -11,6 +11,7 @@ AGENTS.md
 CLAUDE.md
 SKILL_CATALOG.md
 .claude/AGENTIC_WORKFLOW.md
+.agents/skills/*/SKILL.md
 .claude/skills/*/SKILL.md
 .codex/AGENTS.md
 ```
@@ -20,6 +21,7 @@ Optional project-specific additions:
 ```text
 <project>/AGENTS.md
 <project>/CLAUDE.md
+<project>/.agents/skills/
 <project>/.claude/skills/
 <project>/.claude/agents/
 ```
@@ -28,7 +30,7 @@ Nearest project guidance should override this portable workflow.
 
 ## Bundled Local Skills
 
-Run `/skills` in Claude Code after copying the repo into a project. Expected local skills:
+Codex-native skills live in `.agents/skills/`. Claude Code compatibility copies live in `.claude/skills/`. Run `/skills` in Claude Code after copying the repo into a project. Expected local skills:
 
 - `agentic-lightweight-loop`
 - `agentic-formal-feature`
@@ -38,7 +40,7 @@ Run `/skills` in Claude Code after copying the repo into a project. Expected loc
 For Codex, reference the skill path explicitly, for example:
 
 ```text
-Use .claude/skills/agentic-formal-feature/SKILL.md and AGENTS.md for this task.
+Use .agents/skills/agentic-formal-feature/SKILL.md and AGENTS.md for this task.
 ```
 
 ## Recommended Stack

@@ -4,14 +4,14 @@ This repo bundles local workflow skills and documents external skill systems tha
 
 ## Bundled Local Skills
 
-These are project-local Claude Code skills under `.claude/skills/`. After copying this repo into a project, launch Claude Code from the project root and run `/skills` to verify discovery.
+Primary Codex-native skills live under `.agents/skills/`. Claude Code compatibility copies live under `.claude/skills/`. After copying this repo into a project, launch Codex or Claude Code from the project root and verify discovery with the available skills UI or `/skills`.
 
-| Skill | Use When | File |
-|---|---|---|
-| `agentic-lightweight-loop` | Routine bug fixes, small features, local refactors | `.claude/skills/agentic-lightweight-loop/SKILL.md` |
-| `agentic-formal-feature` | Risky feature work needing spec, acceptance criteria, architecture plan, TDD, and hardening | `.claude/skills/agentic-formal-feature/SKILL.md` |
-| `agentic-role-review` | gstack-style product/architecture/devex/QA/security/performance/ship review | `.claude/skills/agentic-role-review/SKILL.md` |
-| `framework-contract-review` | Framework/library/API work with compatibility, lifecycle, performance, docs, tests, and release risk | `.claude/skills/framework-contract-review/SKILL.md` |
+| Skill | Use When | Codex Path | Claude Mirror |
+|---|---|---|---|
+| `agentic-lightweight-loop` | Routine bug fixes, small features, local refactors | `.agents/skills/agentic-lightweight-loop/SKILL.md` | `.claude/skills/agentic-lightweight-loop/SKILL.md` |
+| `agentic-formal-feature` | Risky feature work needing spec, acceptance criteria, architecture plan, TDD, and hardening | `.agents/skills/agentic-formal-feature/SKILL.md` | `.claude/skills/agentic-formal-feature/SKILL.md` |
+| `agentic-role-review` | gstack-style product/architecture/devex/QA/security/performance/ship review | `.agents/skills/agentic-role-review/SKILL.md` | `.claude/skills/agentic-role-review/SKILL.md` |
+| `framework-contract-review` | Framework/library/API work with compatibility, lifecycle, performance, docs, tests, and release risk | `.agents/skills/framework-contract-review/SKILL.md` | `.claude/skills/framework-contract-review/SKILL.md` |
 
 ## External Skills And Tools
 
@@ -26,14 +26,16 @@ These are not bundled here. This repo provides prompts, command mappings, and lo
 | Context Engineering Kit | Install separately if you use that pack | Use `agentic-formal-feature` and `agentic-role-review` as local substitutes |
 | Context7 or official-doc lookup | Configure in your agent/editor environment | Use for external APIs and fast-changing docs before relying on memory |
 | ponytail | Not bundled; no verified install source is encoded here | Add an adapter skill once your local ponytail installation and commands are known |
+| `openai/skills` | Deprecated upstream catalog; still useful as a source for curated local installs | Prefer current plugin examples for distribution; use `$skill-installer` only for local experimentation |
 
-## Claude Code Install
+## Install Into A Project
 
 Copy the files into a project:
 
 ```bash
 cp AGENTS.md CLAUDE.md SKILL_CATALOG.md /path/to/project/
-mkdir -p /path/to/project/.claude /path/to/project/.codex
+mkdir -p /path/to/project/.agents /path/to/project/.claude /path/to/project/.codex
+cp -R .agents/skills /path/to/project/.agents/
 cp -R .claude/AGENTIC_WORKFLOW.md .claude/README.md .claude/skills /path/to/project/.claude/
 cp .codex/AGENTS.md /path/to/project/.codex/
 ```
@@ -44,15 +46,17 @@ Then start Claude Code from that project and run:
 /skills
 ```
 
+For Codex, start it from the project root so `.agents/skills` is scanned.
+
 ## Codex Usage
 
-Codex does not use Claude Code slash commands. It reads `AGENTS.md` and can be asked to follow a local skill file explicitly:
+Codex reads `AGENTS.md` and can invoke repo-local skills from `.agents/skills` implicitly or explicitly:
 
 ```text
-Use .claude/skills/agentic-formal-feature/SKILL.md and AGENTS.md for this task.
+Use .agents/skills/agentic-formal-feature/SKILL.md and AGENTS.md for this task.
 ```
 
-To install Codex-specific skills from the OpenAI skill registry, use:
+To install user-level Codex skills from the deprecated `openai/skills` catalog for local experimentation, use:
 
 ```bash
 python ~/.codex/skills/.system/skill-installer/scripts/list-skills.py
@@ -61,4 +65,4 @@ python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github
   --path skills/.curated/<skill-name>
 ```
 
-Restart Codex after installing new Codex skills.
+Restart Codex after installing new user-level Codex skills.

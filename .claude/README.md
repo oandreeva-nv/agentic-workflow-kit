@@ -9,11 +9,11 @@ AGENTS.md
 .claude/AGENTIC_WORKFLOW.md
 ```
 
-For project-specific skills and agents, keep them in that project's own `.claude/skills/` and `.claude/agents/` directories.
+For Codex-native project skills, use `.agents/skills/`. For Claude Code compatibility, keep mirror skills in `.claude/skills/` and agents in `.claude/agents/`.
 
 ## Bundled Skills
 
-This kit includes project-local Claude Code skills in `.claude/skills/`:
+This kit includes Claude Code compatibility skills in `.claude/skills/`, mirrored from the Codex-native `.agents/skills/`:
 
 - `agentic-lightweight-loop`
 - `agentic-formal-feature`

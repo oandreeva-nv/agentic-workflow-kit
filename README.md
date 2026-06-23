@@ -12,7 +12,8 @@ CLAUDE.md                       # Claude Code entrypoint that imports AGENTS.md
 SKILL_CATALOG.md                # explicit inventory of bundled and external skills
 .claude/AGENTIC_WORKFLOW.md     # commands, prompts, and workflow examples
 .claude/README.md               # short Claude Code orientation
-.claude/skills/*/SKILL.md       # bundled local Claude Code skills
+.agents/skills/*/SKILL.md       # bundled Codex-native skills
+.claude/skills/*/SKILL.md       # Claude Code compatibility mirror
 .codex/AGENTS.md                # Codex-specific lightweight guidance
 ```
 
@@ -22,8 +23,9 @@ From this repository:
 
 ```bash
 cp AGENTS.md CLAUDE.md SKILL_CATALOG.md /path/to/project/
-mkdir -p /path/to/project/.claude /path/to/project/.codex
+mkdir -p /path/to/project/.agents /path/to/project/.claude /path/to/project/.codex
 cp .claude/AGENTIC_WORKFLOW.md .claude/README.md /path/to/project/.claude/
+cp -R .agents/skills /path/to/project/.agents/
 cp -R .claude/skills /path/to/project/.claude/
 cp .codex/AGENTS.md /path/to/project/.codex/
 ```
@@ -42,7 +44,7 @@ Use these as layers, not as a required sequence for every patch:
 
 ## Bundled Local Skills
 
-This repo now includes project-local Claude Code skills:
+This repo includes Codex-native skills under `.agents/skills/` and a Claude Code compatibility mirror under `.claude/skills/`:
 
 | Skill | Purpose |
 |---|---|
@@ -87,9 +89,9 @@ Use DAE for risky features, not routine cleanup.
 
 ## Codex Skills
 
-Codex always reads relevant `AGENTS.md` guidance. Additional Codex skills can be installed into `~/.codex/skills`.
+Codex always reads relevant `AGENTS.md` guidance. Repo-local Codex skills live in `.agents/skills/`; launch Codex from the project so those skills are discoverable. Additional user-level Codex skills can be installed into `~/.agents/skills` or via the skill installer.
 
-List curated Codex skills:
+`openai/skills` is deprecated in favor of current plugin examples, but it can still be useful for curated local installs. List curated Codex skills:
 
 ```bash
 python ~/.codex/skills/.system/skill-installer/scripts/list-skills.py
@@ -174,21 +176,6 @@ Review this diff as:
 - Release Readiness Reviewer
 
 Report findings first, with file and line references.
-```
-
-## Create A GitHub Repo
-
-If you have GitHub CLI installed and authenticated:
-
-```bash
-gh repo create agentic-workflow-kit --private --source=. --remote=origin --push
-```
-
-Without GitHub CLI, create an empty GitHub repository in the browser, then run:
-
-```bash
-git remote add origin git@github.com:<owner>/agentic-workflow-kit.git
-git push -u origin main
 ```
 
 ## License
