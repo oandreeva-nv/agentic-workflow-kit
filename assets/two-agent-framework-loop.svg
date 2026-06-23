@@ -1,0 +1,176 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1350" height="1120" viewBox="0 0 1350 1120" role="img" aria-labelledby="title desc">
+  <title id="title">Two-Agent Framework Development Loop</title>
+  <desc id="desc">Lifecycle diagram showing a design and review agent handing work to an implementation and validation agent across discover, spec, plan review, implementation, adversarial review, final validation, ship, and reflect phases.</desc>
+  <defs>
+    <style>
+      .bg { fill: #f7f8fb; }
+      .title { font: 700 30px Arial, sans-serif; fill: #172033; }
+      .subtitle { font: 400 15px Arial, sans-serif; fill: #536075; }
+      .lane-title { font: 700 18px Arial, sans-serif; fill: #172033; }
+      .phase { font: 700 11.5px Arial, sans-serif; fill: #5f6b7d; letter-spacing: 0.3px; }
+      .phase-heading { font: 700 13px Arial, sans-serif; fill: #334155; }
+      .card-title { font: 700 15px Arial, sans-serif; fill: #172033; }
+      .card-body { font: 400 13px Arial, sans-serif; fill: #334155; }
+      .step { font: 700 12px Arial, sans-serif; fill: #ffffff; }
+      .agent1-card { fill: #fff7ed; stroke: #f59e0b; stroke-width: 1.5; }
+      .agent2-card { fill: #eff6ff; stroke: #3b82f6; stroke-width: 1.5; }
+      .ship-card { fill: #f0fdf4; stroke: #22c55e; stroke-width: 1.5; }
+      .lane { fill: #ffffff; stroke: #d8dee9; stroke-width: 1; }
+      .phase-gutter { fill: #f1f5f9; stroke: #d8dee9; stroke-width: 1; }
+      .phase-line { stroke: #cbd5e1; stroke-width: 1; stroke-dasharray: 4 6; }
+      .arrow { stroke: #475569; stroke-width: 1.8; fill: none; marker-end: url(#arrowhead); }
+      .badge-agent1 { fill: #ea580c; }
+      .badge-agent2 { fill: #2563eb; }
+      .badge-ship { fill: #16a34a; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <path d="M0,0 L10,4 L0,8 Z" fill="#475569" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1350" height="1120" rx="0" />
+  <text class="title" x="40" y="58">Two-Agent Framework Development Loop</text>
+  <text class="subtitle" x="40" y="84">Design - Review - Implement - Validate - Ship - Reflect</text>
+
+  <rect class="phase-gutter" x="40" y="118" width="170" height="930" rx="8" />
+  <rect class="lane" x="235" y="118" width="470" height="930" rx="8" />
+  <rect class="lane" x="800" y="118" width="470" height="930" rx="8" />
+  <text class="phase-heading" x="125" y="148" text-anchor="middle">Phases</text>
+  <text class="lane-title" x="470" y="148" text-anchor="middle">Agent 1: Design + Review</text>
+  <text class="subtitle" x="470" y="170" text-anchor="middle">interactive discovery, challenge, reviews, decisions</text>
+  <text class="lane-title" x="1035" y="148" text-anchor="middle">Agent 2: Implement + Validate</text>
+  <text class="subtitle" x="1035" y="170" text-anchor="middle">repo scan, patch execution, tests, evidence</text>
+
+  <line class="phase-line" x1="40" y1="240" x2="1270" y2="240" />
+  <line class="phase-line" x1="40" y1="355" x2="1270" y2="355" />
+  <line class="phase-line" x1="40" y1="540" x2="1270" y2="540" />
+  <line class="phase-line" x1="40" y1="665" x2="1270" y2="665" />
+  <line class="phase-line" x1="40" y1="805" x2="1270" y2="805" />
+  <line class="phase-line" x1="40" y1="935" x2="1270" y2="935" />
+
+  <text class="phase" x="58" y="222">DISCOVER / SCOPE</text>
+  <text class="phase" x="58" y="337">SPEC / VALIDATE</text>
+  <text class="phase" x="58" y="522">PLAN REVIEW</text>
+  <text class="phase" x="58" y="647">IMPLEMENT / CHECKPOINT</text>
+  <text class="phase" x="58" y="787">ADVERSARIAL REVIEW</text>
+  <text class="phase" x="58" y="917">FINAL VALIDATION</text>
+  <text class="phase" x="58" y="1030">SHIP / LEARN</text>
+
+  <!-- Step cards -->
+  <g id="step-1">
+    <rect class="agent1-card" x="295" y="190" width="350" height="76" rx="8" />
+    <circle class="badge-agent1" cx="322" cy="218" r="15" /><text class="step" x="322" y="222" text-anchor="middle">1</text>
+    <text class="card-title" x="348" y="213">Brainstorming / discovery</text>
+    <text class="card-body" x="348" y="236">generate idea notes</text>
+  </g>
+  <g id="step-2">
+    <rect class="agent2-card" x="855" y="190" width="350" height="76" rx="8" />
+    <circle class="badge-agent2" cx="882" cy="218" r="15" /><text class="step" x="882" y="222" text-anchor="middle">2</text>
+    <text class="card-title" x="908" y="213">Repo/project scan</text>
+    <text class="card-body" x="908" y="236">map files, tests, constraints</text>
+  </g>
+  <g id="step-3">
+    <rect class="agent1-card" x="295" y="305" width="350" height="76" rx="8" />
+    <circle class="badge-agent1" cx="322" cy="333" r="15" /><text class="step" x="322" y="337" text-anchor="middle">3</text>
+    <text class="card-title" x="348" y="328">Formal framework spec</text>
+    <text class="card-body" x="348" y="351">ready contract, ACs, Gherkin</text>
+  </g>
+  <g id="step-4">
+    <rect class="agent2-card" x="855" y="305" width="350" height="76" rx="8" />
+    <circle class="badge-agent2" cx="882" cy="333" r="15" /><text class="step" x="882" y="337" text-anchor="middle">4</text>
+    <text class="card-title" x="908" y="328">Validate spec against repo</text>
+    <text class="card-body" x="908" y="351">check fit, gaps, test surface</text>
+  </g>
+  <g id="step-5">
+    <rect class="agent1-card" x="295" y="425" width="350" height="76" rx="8" />
+    <circle class="badge-agent1" cx="322" cy="453" r="15" /><text class="step" x="322" y="457" text-anchor="middle">5</text>
+    <text class="card-title" x="348" y="448">Plan reviews</text>
+    <text class="card-body" x="348" y="471">architecture, devex, risk</text>
+  </g>
+  <g id="step-6">
+    <rect class="agent1-card" x="295" y="515" width="350" height="76" rx="8" />
+    <circle class="badge-agent1" cx="322" cy="543" r="15" /><text class="step" x="322" y="547" text-anchor="middle">6</text>
+    <text class="card-title" x="348" y="538">Write implementation plan</text>
+    <text class="card-body" x="348" y="561">reviewable implementation sequence</text>
+  </g>
+  <g id="step-7">
+    <rect class="agent2-card" x="855" y="425" width="350" height="76" rx="8" />
+    <circle class="badge-agent2" cx="882" cy="453" r="15" /><text class="step" x="882" y="457" text-anchor="middle">7</text>
+    <text class="card-title" x="908" y="448">Translate plan to test status</text>
+    <text class="card-body" x="908" y="471">red/green targets, validation matrix</text>
+  </g>
+  <g id="step-8">
+    <rect class="agent2-card" x="855" y="515" width="350" height="76" rx="8" />
+    <circle class="badge-agent2" cx="882" cy="543" r="15" /><text class="step" x="882" y="547" text-anchor="middle">8</text>
+    <text class="card-title" x="908" y="538">TDD implementation</text>
+    <text class="card-body" x="908" y="561">incremental patch steps</text>
+  </g>
+  <g id="step-9">
+    <rect class="agent1-card" x="295" y="635" width="350" height="76" rx="8" />
+    <circle class="badge-agent1" cx="322" cy="663" r="15" /><text class="step" x="322" y="667" text-anchor="middle">9</text>
+    <text class="card-title" x="348" y="658">Review diff / checkpoint</text>
+    <text class="card-body" x="348" y="681">scope, risk, implementation quality</text>
+  </g>
+  <g id="step-10">
+    <rect class="agent2-card" x="855" y="635" width="350" height="76" rx="8" />
+    <circle class="badge-agent2" cx="882" cy="663" r="15" /><text class="step" x="882" y="667" text-anchor="middle">10</text>
+    <text class="card-title" x="908" y="658">Continue implementation</text>
+    <text class="card-body" x="908" y="681">address checkpoint findings</text>
+  </g>
+  <g id="step-11">
+    <rect class="agent1-card" x="295" y="755" width="350" height="76" rx="8" />
+    <circle class="badge-agent1" cx="322" cy="783" r="15" /><text class="step" x="322" y="787" text-anchor="middle">11</text>
+    <text class="card-title" x="348" y="778">Adversarial framework review</text>
+    <text class="card-body" x="348" y="801">API, compat, lifecycle, abuse</text>
+  </g>
+  <g id="step-12">
+    <rect class="agent2-card" x="855" y="755" width="350" height="76" rx="8" />
+    <circle class="badge-agent2" cx="882" cy="783" r="15" /><text class="step" x="882" y="787" text-anchor="middle">12</text>
+    <text class="card-title" x="908" y="778">Fix findings and validate</text>
+    <text class="card-body" x="908" y="801">tests, linters, benchmarks as needed</text>
+  </g>
+  <g id="step-13">
+    <rect class="agent1-card" x="295" y="875" width="350" height="76" rx="8" />
+    <circle class="badge-agent1" cx="322" cy="903" r="15" /><text class="step" x="322" y="907" text-anchor="middle">13</text>
+    <text class="card-title" x="348" y="898">Compatibility / perf / security</text>
+    <text class="card-body" x="348" y="921">docs and release review</text>
+  </g>
+  <g id="step-14">
+    <rect class="agent2-card" x="855" y="875" width="350" height="76" rx="8" />
+    <circle class="badge-agent2" cx="882" cy="903" r="15" /><text class="step" x="882" y="907" text-anchor="middle">14</text>
+    <text class="card-title" x="908" y="898">Final patch summary</text>
+    <text class="card-body" x="908" y="921">validation evidence and residual risk</text>
+  </g>
+  <g id="step-15">
+    <rect class="ship-card" x="295" y="995" width="350" height="76" rx="8" />
+    <circle class="badge-ship" cx="322" cy="1023" r="15" /><text class="step" x="322" y="1027" text-anchor="middle">15</text>
+    <text class="card-title" x="348" y="1018">Ship readiness</text>
+    <text class="card-body" x="348" y="1041">ship review or finish branch</text>
+  </g>
+  <g id="step-16">
+    <rect class="ship-card" x="855" y="995" width="350" height="76" rx="8" />
+    <circle class="badge-ship" cx="882" cy="1023" r="15" /><text class="step" x="882" y="1027" text-anchor="middle">16</text>
+    <text class="card-title" x="908" y="1018">Reflect and update</text>
+    <text class="card-body" x="908" y="1041">AGENTS.md / skills when reusable</text>
+  </g>
+
+  <!-- Arrows -->
+  <path class="arrow" d="M645,228 C745,228 755,228 855,228" />
+  <path class="arrow" d="M1030,266 L1030,305" />
+  <path class="arrow" d="M855,343 C755,343 745,343 645,343" />
+  <path class="arrow" d="M470,381 L470,425" />
+  <path class="arrow" d="M470,501 L470,515" />
+  <path class="arrow" d="M645,553 C745,553 755,463 855,463" />
+  <path class="arrow" d="M1030,501 L1030,515" />
+  <path class="arrow" d="M855,553 C755,553 745,673 645,673" />
+  <path class="arrow" d="M645,673 C745,673 755,673 855,673" />
+  <path class="arrow" d="M1030,711 L1030,755" />
+  <path class="arrow" d="M855,793 C755,793 745,793 645,793" />
+  <path class="arrow" d="M645,793 C745,793 755,793 855,793" />
+  <path class="arrow" d="M1030,831 L1030,875" />
+  <path class="arrow" d="M855,913 C755,913 745,913 645,913" />
+  <path class="arrow" d="M645,913 C745,913 755,913 855,913" />
+  <path class="arrow" d="M1030,951 L1030,995" />
+  <path class="arrow" d="M855,1033 C755,1033 745,1033 645,1033" />
+  <path class="arrow" d="M645,1033 C745,1033 755,1033 855,1033" />
+</svg>

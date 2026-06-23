@@ -10,9 +10,9 @@ The kit is intentionally project-agnostic. Copy it into a workspace or project r
 AGENTS.md                       # portable workflow policy for coding agents
 CLAUDE.md                       # Claude Code entrypoint that imports AGENTS.md
 SKILL_CATALOG.md                # explicit inventory of bundled and external skills
-.claude/AGENTIC_WORKFLOW.md     # commands, prompts, and workflow examples
+.claude/AGENTIC_WORKFLOW.md     # canonical commands, prompts, and workflow guide
 .claude/README.md               # short Claude Code orientation
-assets/claude-codex-framework-loop.svg # lifecycle diagram asset
+assets/two-agent-framework-loop.svg    # lifecycle diagram asset
 .agents/skills/*/SKILL.md       # bundled Codex-native skills
 .claude/skills/*/SKILL.md       # Claude Code compatibility mirror
 .codex/AGENTS.md                # Codex-specific lightweight guidance
@@ -25,7 +25,7 @@ From this repository:
 ```bash
 cp AGENTS.md CLAUDE.md SKILL_CATALOG.md /path/to/project/
 mkdir -p /path/to/project/.agents /path/to/project/.claude /path/to/project/.codex /path/to/project/assets
-cp assets/claude-codex-framework-loop.svg /path/to/project/assets/
+cp assets/two-agent-framework-loop.svg /path/to/project/assets/
 cp .claude/AGENTIC_WORKFLOW.md .claude/README.md /path/to/project/.claude/
 cp -R .agents/skills /path/to/project/.agents/
 cp -R .claude/skills /path/to/project/.claude/
@@ -34,61 +34,13 @@ cp .codex/AGENTS.md /path/to/project/.codex/
 
 Then add project-specific guidance in `/path/to/project/AGENTS.md` or a nested subsystem `AGENTS.md` as needed. Nearest guidance should override this portable workflow.
 
-## Recommended Stack
+## Two-Agent Framework Loop
 
-Use these as layers, not as a required sequence for every patch:
+Use this loop for framework or library work where design quality, compatibility, testing, and release readiness matter. The diagram is role-based: Agent 1 handles interactive design and review; Agent 2 handles repo-grounded implementation and validation.
 
-1. **Repo guidance**: `AGENTS.md`, subsystem docs, coding standards, and local tests.
-2. **Lightweight spec spine**: GSD-style context, scope, plan, validation, and handoff.
-3. **Formal feature discipline**: Superpowers or DAE-style brainstorm, ready contract, acceptance criteria, plan, TDD, review, finish.
-4. **Review and ship layer**: gstack-style product, architecture, devex, QA, security, benchmark, and release reviews.
-5. **Docs lookup**: Context7 or equivalent official-docs lookup for external or fast-changing APIs.
+Default Claude + Codex mapping: Agent 1 = Claude Code, Agent 2 = Codex. The stack layers, full procedure, prompts, command mapping, and fallback instructions live in `.claude/AGENTIC_WORKFLOW.md`.
 
-## Recommended Flow: Claude + Codex Framework Development Loop
-
-Use this loop for framework or library work where design quality, compatibility, testing, and release readiness matter. Claude is the interactive design/review surface. Codex is the repo-grounded execution and validation surface.
-
-Phases: **Design -> Review -> Implement -> Validate -> Ship -> Reflect**
-
-![Claude + Codex Framework Development Loop](assets/claude-codex-framework-loop.svg)
-
-Text flow summary:
-
-1. **[Claude]** Superpowers brainstorming -> generate `/idea-hours`.
-2. **[Codex]** Repo/project scan.
-3. **[Claude]** DAE / framework spec.
-4. **[Codex]** Validate spec against repo.
-5. **[Claude]** gstack `/plan-eng-review` and `/plan-devex-review`.
-6. **[Claude]** Superpowers write-plans.
-7. **[Codex]** Translate plan to test status.
-8. **[Codex]** TDD implementation step by step.
-9. **[Claude]** Review diff / checkpoint.
-10. **[Codex]** Continue implementation.
-11. **[Claude]** Adversarial framework review.
-12. **[Codex]** Fix review findings and run validation.
-13. **[Claude]** Compatibility / performance / security / docs review.
-14. **[Codex]** Final patch summary and validation evidence.
-15. **[Claude]** gstack `/ship` or Superpowers finish branch.
-16. **[Codex]** Reflect and update `AGENTS.md` / skills.
-
-
-Legend:
-
-- Left column = Claude: interactive design, challenge, reviews, and decisions.
-- Right column = Codex: repo-grounded autonomous execution, tests, validation, and patch evidence.
-- Arrows = handoffs between Claude and Codex.
-
-Tool mapping:
-
-| Flow Step | Preferred Tooling | Bundled Fallback |
-|---|---|---|
-| 1-2 Discover / Scope | Superpowers brainstorming, `/idea-hours`, Codex repo scan | `agentic-lightweight-loop` |
-| 3-4 Spec / Validate | DAE / framework spec, Codex spec validation | `agentic-formal-feature` |
-| 5-6 Plan Review | gstack `/plan-eng-review`, `/plan-devex-review`, Superpowers write-plans | `agentic-formal-feature` plus `agentic-role-review` |
-| 7-10 Implement / Checkpoint | Codex TDD execution, Claude checkpoint review | `agentic-lightweight-loop` or `agentic-formal-feature` |
-| 11-12 Adversarial Review | Claude adversarial framework review, Codex fixes | `framework-contract-review` plus `agentic-role-review` |
-| 13-14 Final Validation | compatibility/perf/security/docs review, Codex evidence | `framework-contract-review` |
-| 15-16 Ship / Learn | gstack `/ship`, Superpowers finish branch, Codex reflection | `agentic-role-review`; update `AGENTS.md` / skills when reusable lessons emerge |
+![Two-Agent Framework Development Loop](assets/two-agent-framework-loop.svg)
 
 ## Bundled Local Skills
 
@@ -103,196 +55,12 @@ This repo includes Codex-native skills under `.agents/skills/` and a Claude Code
 
 See `SKILL_CATALOG.md` for the full inventory and external install notes.
 
-## Claude Code Setup
+## Usage Docs
 
-Claude Code reads `CLAUDE.md`, which imports `AGENTS.md`. Start Claude Code from the project root and use the prompts in `.claude/AGENTIC_WORKFLOW.md`.
-
-To install Disciplined Agentic Engineering plugins in Claude Code:
-
-```text
-/plugin marketplace add swingerman/disciplined-agentic-engineering
-/plugin install engineer@disciplined-agentic-engineering
-/plugin install atdd@disciplined-agentic-engineering
-/plugin install crap-analyzer@disciplined-agentic-engineering
-```
-
-Typical DAE feature flow:
-
-```text
-/engineer.onboard
-/engineer.discuss
-/engineer.feature-init
-/engineer.prime-context
-/engineer.discover-acs
-/engineer.atdd
-/engineer.plan
-/atdd:atdd-team
-/engineer.refine
-/engineer.arch-check
-/atdd:mutate
-/engineer.session-summary
-```
-
-Use DAE for risky features, not routine cleanup.
-
-## Codex Skills
-
-Codex uses two durable instruction surfaces here:
-
-- `AGENTS.md` for project conventions, commands, and review expectations.
-- `.agents/skills/<skill-name>/SKILL.md` for reusable, task-specific workflows that Codex can invoke explicitly or implicitly.
-
-For this repo, the bundled Codex-native skills are already checked in under `.agents/skills/`. Copy that directory into a project and start Codex from the project root so the skills are discoverable.
-
-For personal skills that should apply across projects, put them in:
-
-```text
-~/.agents/skills/<skill-name>/SKILL.md
-```
-
-For reusable distribution to other developers, prefer packaging skills as a Codex plugin. The older `openai/skills` catalog is deprecated; use it only for local experimentation with legacy curated or experimental skills.
-
-Legacy local install examples:
-
-```bash
-# List legacy curated skills
-python ~/.codex/skills/.system/skill-installer/scripts/list-skills.py
-
-# Install a legacy curated skill
-python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo openai/skills \
-  --path skills/.curated/<skill-name>
-
-# Install a legacy experimental skill
-python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --repo openai/skills \
-  --path skills/.experimental/<skill-name>
-```
-
-Restart Codex after adding or installing skills if they do not appear automatically.
-
-### Use A Particular Codex Skill
-
-Start Codex from the project root so `.agents/skills` is scanned. Then use one of these patterns:
-
-```text
-Use .agents/skills/agentic-formal-feature/SKILL.md and AGENTS.md for this task.
-```
-
-```text
-Use the agentic-role-review skill from .agents/skills. Review this diff for API compatibility, lifecycle/concurrency, performance, security, test matrix, docs, and release readiness. Findings first.
-```
-
-If your Codex surface supports skill discovery, check the loaded skills with:
-
-```text
-/skills
-```
-
-Expected bundled skills:
-
-```text
-agentic-lightweight-loop
-agentic-formal-feature
-agentic-role-review
-framework-contract-review
-```
-
-## gstack-Style Reviews
-
-gstack is treated as an optional external review-and-ship layer. This repo does not install gstack. To use real gstack commands, install the gstack package/plugin from your team or vendor source in the agent surface that supports those slash commands, usually Claude Code. Verify installation by checking that commands such as `/office-hours`, `/review`, `/qa`, `/cso`, and `/ship` appear in that surface's slash-command list.
-
-Use gstack with the bundled skills like this:
-
-1. **Before implementation**: use `agentic-lightweight-loop` for small tasks or `agentic-formal-feature` for risky work.
-2. **Plan challenge**: if gstack is available, run `/office-hours`, `/autoplan`, `/plan-eng-review`, and `/plan-devex-review` on the plan.
-3. **Implementation**: use Codex or Claude to make the patch, following `AGENTS.md` and the selected skill.
-4. **Pre-handoff review**: if gstack is available, run `/review`, `/qa`, `/cso`, `/benchmark` when relevant, and `/ship` before release.
-5. **Fallback**: if gstack is not installed, use the bundled `agentic-role-review` skill to run the same review lenses locally.
-
-Command mapping:
-
-| Need | gstack command if installed | Bundled fallback |
-|---|---|---|
-| Product challenge | `/office-hours` | `agentic-role-review` Product Challenger |
-| Initial patch plan | `/autoplan` | `agentic-formal-feature` architecture plan |
-| Engineering review | `/plan-eng-review`, `/review` | `agentic-role-review` Architecture/API/Lifecycle lenses |
-| Developer experience | `/plan-devex-review`, `/devex-review` | `agentic-role-review` DevEx/Error Model lenses |
-| QA | `/qa`, `/qa-only` | `agentic-role-review` QA/Test Matrix lenses |
-| Security | `/cso` | `agentic-role-review` Security & Abuse lens |
-| Performance | `/benchmark` | `framework-contract-review` Performance Regression Guard |
-| Release readiness | `/ship`, `/land-and-deploy` | `agentic-role-review` Release Manager lens |
-
-How to invoke the fallback skill:
-
-Codex path invocation, most explicit:
-
-```text
-Use .agents/skills/agentic-role-review/SKILL.md and AGENTS.md. Run a gstack-style review of this plan/diff across product, architecture, devex, API compatibility, lifecycle/concurrency, performance, security, QA, docs, test matrix, and release readiness. Findings first.
-```
-
-Codex skill-name invocation, after Codex discovers `.agents/skills`:
-
-```text
-Use the agentic-role-review skill. Run a gstack-style review of this plan/diff. Findings first, ordered by severity, with file/line references where possible.
-```
-
-Claude Code compatibility invocation:
-
-```text
-Use .claude/skills/agentic-role-review/SKILL.md. Run the same gstack-style review lenses. Findings first.
-```
-
-Minimal fallback prompt:
-
-```text
-Use the agentic-role-review skill for a gstack-style pre-ship review.
-```
-
-## Default Prompts
-
-Lightweight task:
-
-```text
-Follow AGENTS.md. First inspect the touched subsystem and restate:
-1. behavior change
-2. non-goals
-3. files likely to change
-4. narrow validation plan
-
-Then implement the smallest safe patch, run relevant tests, and review the diff for regressions.
-```
-
-Formal feature:
-
-```text
-Use a formal spec-driven workflow:
-1. draft the Ready contract
-2. list acceptance criteria in domain language
-3. write Gherkin scenarios only if they add executable clarity
-4. propose the architecture plan and test matrix
-5. wait for approval before implementation
-6. implement with acceptance/integration tests plus unit tests
-7. run role-based review before handoff
-```
-
-Role review:
-
-```text
-Review this diff as:
-- API Contract Guardian
-- Compatibility & Migration Reviewer
-- Error Model Designer
-- Lifecycle & Concurrency Reviewer
-- Performance Regression Guard
-- Security & Abuse Reviewer
-- Dependency Gatekeeper
-- Docs-as-Tests Reviewer
-- Test Matrix Reviewer
-- Release Readiness Reviewer
-
-Report findings first, with file and line references.
-```
+- `.claude/AGENTIC_WORKFLOW.md`: canonical operating guide for the two-agent loop, DAE/ATDD, gstack-style review, fallback prompts, and Claude/Codex handoffs.
+- `SKILL_CATALOG.md`: bundled skill inventory, external tool notes, and Codex skill invocation examples.
+- `AGENTS.md`: portable repo guidance for coding agents.
+- `CLAUDE.md`: Claude Code entrypoint that imports the shared guidance.
 
 ## License
 

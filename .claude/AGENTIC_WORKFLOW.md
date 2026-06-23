@@ -2,33 +2,6 @@
 
 Portable command guide for using methodology skill packs across projects. Keep this file project-agnostic; put project-specific rules in that project's own `AGENTS.md`.
 
-## Files to Port
-
-Copy these files into a new project or workspace root:
-
-```text
-AGENTS.md
-CLAUDE.md
-SKILL_CATALOG.md
-.claude/AGENTIC_WORKFLOW.md
-assets/claude-codex-framework-loop.svg
-.agents/skills/*/SKILL.md
-.claude/skills/*/SKILL.md
-.codex/AGENTS.md
-```
-
-Optional project-specific additions:
-
-```text
-<project>/AGENTS.md
-<project>/CLAUDE.md
-<project>/.agents/skills/
-<project>/.claude/skills/
-<project>/.claude/agents/
-```
-
-Nearest project guidance should override this portable workflow.
-
 ## Bundled Local Skills
 
 Codex-native skills live in `.agents/skills/`. Claude Code compatibility copies live in `.claude/skills/`. Run `/skills` in Claude Code after copying the repo into a project. Expected local skills:
@@ -54,51 +27,52 @@ Use these as layers, not as a mandatory sequence for every patch:
 4. **Review and ship layer**: gstack-style product, architecture, devex, QA, security, benchmark, and release reviews.
 5. **Docs lookup**: Context7 or equivalent official-docs lookup for external APIs and fast-changing libraries.
 
-## Recommended Flow: Claude + Codex Framework Development Loop
+## Recommended Flow: Two-Agent Framework Development Loop
 
-Use this loop for framework or library work where design quality, compatibility, testing, and release readiness matter. Claude is the interactive design/review surface. Codex is the repo-grounded execution and validation surface.
+Use this loop for framework or library work where design quality, compatibility, testing, and release readiness matter. It is role-based: Agent 1 leads design, challenge, reviews, and decisions; Agent 2 scans the repo, implements, tests, and returns validation evidence.
+
+Default Claude + Codex mapping: Agent 1 = Claude Code, Agent 2 = Codex. You can swap the actual tools as long as the roles stay clear.
 
 Phases: **Design -> Review -> Implement -> Validate -> Ship -> Reflect**
 
-![Claude + Codex Framework Development Loop](../assets/claude-codex-framework-loop.svg)
+![Two-Agent Framework Development Loop](../assets/two-agent-framework-loop.svg)
 
 Text flow summary:
 
-1. **[Claude]** Superpowers brainstorming -> generate `/idea-hours`.
-2. **[Codex]** Repo/project scan.
-3. **[Claude]** DAE / framework spec.
-4. **[Codex]** Validate spec against repo.
-5. **[Claude]** gstack `/plan-eng-review` and `/plan-devex-review`.
-6. **[Claude]** Superpowers write-plans.
-7. **[Codex]** Translate plan to test status.
-8. **[Codex]** TDD implementation step by step.
-9. **[Claude]** Review diff / checkpoint.
-10. **[Codex]** Continue implementation.
-11. **[Claude]** Adversarial framework review.
-12. **[Codex]** Fix review findings and run validation.
-13. **[Claude]** Compatibility / performance / security / docs review.
-14. **[Codex]** Final patch summary and validation evidence.
-15. **[Claude]** gstack `/ship` or Superpowers finish branch.
-16. **[Codex]** Reflect and update `AGENTS.md` / skills.
-
+1. **[Agent 1]** Superpowers brainstorming -> generate `/idea-hours`.
+2. **[Agent 2]** Repo/project scan.
+3. **[Agent 1]** DAE / framework spec.
+4. **[Agent 2]** Validate spec against repo.
+5. **[Agent 1]** gstack `/plan-eng-review` and `/plan-devex-review`.
+6. **[Agent 1]** Superpowers write-plans.
+7. **[Agent 2]** Translate plan to test status.
+8. **[Agent 2]** TDD implementation step by step.
+9. **[Agent 1]** Review diff / checkpoint.
+10. **[Agent 2]** Continue implementation.
+11. **[Agent 1]** Adversarial framework review.
+12. **[Agent 2]** Fix review findings and run validation.
+13. **[Agent 1]** Compatibility / performance / security / docs review.
+14. **[Agent 2]** Final patch summary and validation evidence.
+15. **[Agent 1]** gstack `/ship` or Superpowers finish branch.
+16. **[Agent 2]** Reflect and update `AGENTS.md` / skills.
 
 Legend:
 
-- Left column = Claude: interactive design, challenge, reviews, and decisions.
-- Right column = Codex: repo-grounded autonomous execution, tests, validation, and patch evidence.
-- Arrows = handoffs between Claude and Codex.
+- Left column = Agent 1: interactive design, challenge, reviews, and decisions.
+- Right column = Agent 2: repo-grounded execution, tests, validation, and patch evidence.
+- Arrows = handoffs between the two agents.
 
 Tool mapping:
 
 | Flow Step | Preferred Tooling | Bundled Fallback |
 |---|---|---|
-| 1-2 Discover / Scope | Superpowers brainstorming, `/idea-hours`, Codex repo scan | `agentic-lightweight-loop` |
-| 3-4 Spec / Validate | DAE / framework spec, Codex spec validation | `agentic-formal-feature` |
+| 1-2 Discover / Scope | Superpowers brainstorming, `/idea-hours`, Agent 2 repo scan | `agentic-lightweight-loop` |
+| 3-4 Spec / Validate | DAE / framework spec, Agent 2 spec validation | `agentic-formal-feature` |
 | 5-6 Plan Review | gstack `/plan-eng-review`, `/plan-devex-review`, Superpowers write-plans | `agentic-formal-feature` plus `agentic-role-review` |
-| 7-10 Implement / Checkpoint | Codex TDD execution, Claude checkpoint review | `agentic-lightweight-loop` or `agentic-formal-feature` |
-| 11-12 Adversarial Review | Claude adversarial framework review, Codex fixes | `framework-contract-review` plus `agentic-role-review` |
-| 13-14 Final Validation | compatibility/perf/security/docs review, Codex evidence | `framework-contract-review` |
-| 15-16 Ship / Learn | gstack `/ship`, Superpowers finish branch, Codex reflection | `agentic-role-review`; update `AGENTS.md` / skills when reusable lessons emerge |
+| 7-10 Implement / Checkpoint | Agent 2 TDD execution, Agent 1 checkpoint review | `agentic-lightweight-loop` or `agentic-formal-feature` |
+| 11-12 Adversarial Review | Agent 1 adversarial framework review, Agent 2 fixes | `framework-contract-review` plus `agentic-role-review` |
+| 13-14 Final Validation | compatibility/perf/security/docs review, Agent 2 evidence | `framework-contract-review` |
+| 15-16 Ship / Learn | gstack `/ship`, Superpowers finish branch, Agent 2 reflection | `agentic-role-review`; update `AGENTS.md` / skills when reusable lessons emerge |
 
 ## Default Prompts
 
@@ -241,7 +215,7 @@ Context -> Spec -> Plan -> Implement -> Verify -> Role Review -> Ship Handoff
 
 Escalate only when the risk justifies the overhead.
 
-## Codex + Claude Split
+## Example Claude + Codex Split
 
 - Use **Claude Code** when you want installed slash commands, marketplace plugins, or Claude sub-agents.
 - Use **Codex** when you want tight local implementation, test execution, diff review, or a second opinion on a Claude-produced plan.
