@@ -20,7 +20,7 @@ These are not bundled here. This repo provides prompts, command mappings, and lo
 | External System | Status In This Repo | How To Use |
 |---|---|---|
 | Disciplined Agentic Engineering / ATDD | Install separately as Claude Code plugins | Use `/plugin marketplace add swingerman/disciplined-agentic-engineering`, then install `engineer`, `atdd`, and `crap-analyzer` |
-| gstack | Install separately | Use real slash commands when available; otherwise use `agentic-role-review` as the local fallback |
+| gstack | Optional external package/plugin; not bundled here | Install from your team/vendor source in the surface that supports its slash commands. Use real commands for plan/review/QA/security/ship checks; otherwise use `agentic-role-review` as the local fallback. |
 | Superpowers | Install separately if you use that pack | Use `agentic-formal-feature` as the local fallback shape: brainstorm -> clarify -> plan -> isolate -> TDD -> review -> finish |
 | GSD Core / Get Shit Done | Install separately if you use that pack | Use `agentic-formal-feature` as the local fallback for phase control and spec/context engineering |
 | Context Engineering Kit | Install separately if you use that pack | Use `agentic-formal-feature` and `agentic-role-review` as local substitutes |

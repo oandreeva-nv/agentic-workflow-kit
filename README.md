@@ -152,21 +152,34 @@ framework-contract-review
 
 ## gstack-Style Reviews
 
-If gstack is installed, use these around planning and before shipping:
+gstack is treated as an optional external review-and-ship layer. This repo does not install gstack. To use real gstack commands, install the gstack package/plugin from your team or vendor source in the agent surface that supports those slash commands, usually Claude Code. Verify installation by checking that commands such as `/office-hours`, `/review`, `/qa`, `/cso`, and `/ship` appear in that surface's slash-command list.
+
+Use gstack with the bundled skills like this:
+
+1. **Before implementation**: use `agentic-lightweight-loop` for small tasks or `agentic-formal-feature` for risky work.
+2. **Plan challenge**: if gstack is available, run `/office-hours`, `/autoplan`, `/plan-eng-review`, and `/plan-devex-review` on the plan.
+3. **Implementation**: use Codex or Claude to make the patch, following `AGENTS.md` and the selected skill.
+4. **Pre-handoff review**: if gstack is available, run `/review`, `/qa`, `/cso`, `/benchmark` when relevant, and `/ship` before release.
+5. **Fallback**: if gstack is not installed, use the bundled `agentic-role-review` skill to run the same review lenses locally.
+
+Command mapping:
+
+| Need | gstack command if installed | Bundled fallback |
+|---|---|---|
+| Product challenge | `/office-hours` | `agentic-role-review` Product Challenger |
+| Initial patch plan | `/autoplan` | `agentic-formal-feature` architecture plan |
+| Engineering review | `/plan-eng-review`, `/review` | `agentic-role-review` Architecture/API/Lifecycle lenses |
+| Developer experience | `/plan-devex-review`, `/devex-review` | `agentic-role-review` DevEx/Error Model lenses |
+| QA | `/qa`, `/qa-only` | `agentic-role-review` QA/Test Matrix lenses |
+| Security | `/cso` | `agentic-role-review` Security & Abuse lens |
+| Performance | `/benchmark` | `framework-contract-review` Performance Regression Guard |
+| Release readiness | `/ship`, `/land-and-deploy` | `agentic-role-review` Release Manager lens |
+
+Fallback prompt for Codex:
 
 ```text
-/office-hours
-/autoplan
-/plan-eng-review
-/plan-devex-review
-/review
-/qa
-/cso
-/benchmark
-/ship
+Use .agents/skills/agentic-role-review/SKILL.md and AGENTS.md. Run a gstack-style review of this plan/diff across product, architecture, devex, API compatibility, lifecycle/concurrency, performance, security, QA, docs, test matrix, and release readiness. Findings first.
 ```
-
-If the slash commands are unavailable, ask Codex or Claude to perform the same named role review explicitly.
 
 ## Default Prompts
 

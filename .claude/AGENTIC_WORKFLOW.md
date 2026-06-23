@@ -137,7 +137,9 @@ Use DAE for risky feature work, not routine typo fixes.
 
 ## gstack-Style Review Layer
 
-If gstack is installed, use it around planning and before shipping:
+gstack is optional and external to this kit. Install it from your team or vendor source in the agent surface that supports its slash commands, usually Claude Code. This kit provides the local fallback skill `agentic-role-review` for the same review shape.
+
+Use real gstack commands when available:
 
 ```text
 /office-hours              # product challenge and problem framing
@@ -145,13 +147,22 @@ If gstack is installed, use it around planning and before shipping:
 /plan-eng-review           # architecture review
 /plan-devex-review         # developer experience review
 /review                    # code review
+/devex-review              # developer experience review
 /qa                        # QA pass
+/qa-only                   # QA-only pass
 /cso                       # security review
 /benchmark                 # performance check
 /ship                      # release readiness
+/land-and-deploy           # final ship/deploy flow
 ```
 
-If commands are unavailable, ask Claude or Codex to perform the same named role review explicitly.
+Use this sequence with the bundled skills:
+
+1. Draft scope with `agentic-lightweight-loop` or `agentic-formal-feature`.
+2. Run gstack plan challenge commands if installed.
+3. Implement the patch with Codex or Claude.
+4. Run gstack review/QA/security/benchmark/ship commands if installed.
+5. If gstack is unavailable, invoke `agentic-role-review` and ask for the same lenses explicitly.
 
 ## Superpowers / GSD / Context Engineering
 
