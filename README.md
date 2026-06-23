@@ -42,6 +42,118 @@ Use these as layers, not as a required sequence for every patch:
 4. **Review and ship layer**: gstack-style product, architecture, devex, QA, security, benchmark, and release reviews.
 5. **Docs lookup**: Context7 or equivalent official-docs lookup for external or fast-changing APIs.
 
+## Recommended Flow: Claude + Codex Framework Development Loop
+
+Use this loop for framework or library work where design quality, compatibility, testing, and release readiness matter. Claude is the interactive design/review surface. Codex is the repo-grounded execution and validation surface.
+
+Phases: **Design -> Review -> Implement -> Validate -> Ship -> Reflect**
+
+```text
+PHASE: Discover / Scope
++-----------------------------------------------------+
+| 1. [Claude] Superpowers brainstorming               |
+|    -> generate /idea-hours                          |
++----------------------+------------------------------+
+                       |
+                       v                         [Codex]
+            +----------------------+
+            | 2. Repo/project scan |
+            +----------+-----------+
+                       |
+PHASE: Spec / Validate v
++------------------------------------------------------+
+| 3. [Claude] DAE / framework spec                    |
++----------------------+-------------------------------+
+                       |
+                       v                         [Codex]
+            +-------------------------------+
+            | 4. Validate spec against repo |
+            +----------+--------------------+
+                       |
+PHASE: Plan Review     v
++------------------------------------------------------+
+| 5. [Claude] gstack /plan-eng-review                 |
+|             /plan-devex-review                      |
++----------------------+-------------------------------+
+                       |
++----------------------v-------------------------------+
+| 6. [Claude] Superpowers write-plans                 |
++----------------------+-------------------------------+
+                       |
+                       v                         [Codex]
+            +---------------------------------+
+            | 7. Translate plan -> test status|
+            +----------+----------------------+
+                       |
+                       v                         [Codex]
+            +----------------------------------+
+            | 8. TDD: implement step by step   |
+            +----------+-----------------------+
+                       |
+PHASE: Implement / Checkpoint
++----------------------v-------------------------------+
+| 9. [Claude] Review diff / checkpoint                |
++----------------------+-------------------------------+
+                       |
+                       v                         [Codex]
+            +------------------------------+
+            | 10. Continue implementation  |
+            +----------+-------------------+
+                       |
+PHASE: Adversarial Review
++----------------------v-------------------------------+
+| 11. [Claude] Adversarial framework review           |
++----------------------+-------------------------------+
+                       |
+                       v                         [Codex]
+            +--------------------------------------+
+            | 12. Fix review findings             |
+            |     and run validation              |
+            +----------+---------------------------+
+                       |
+PHASE: Final Validation
++----------------------v-------------------------------+
+| 13. [Claude] Compatibility / perf / security / docs |
+|             review                                  |
++----------------------+-------------------------------+
+                       |
+                       v                         [Codex]
+            +------------------------------------------+
+            | 14. Final patch summary                 |
+            |     and validation evidence             |
+            +----------+-------------------------------+
+                       |
+PHASE: Ship / Learn
++----------------------v-------------------------------+
+| 15. [Claude] gstack /ship or                        |
+|             Superpowers finish branch               |
++----------------------+-------------------------------+
+                       |
+                       v                         [Codex]
+            +----------------------------------+
+            | 16. Reflect and update           |
+            |     AGENTS.md / skills           |
+            +----------------------------------+
+```
+
+Legend:
+
+- Left column = Claude: interactive design, challenge, reviews, and decisions.
+- Right column = Codex: repo-grounded autonomous execution, tests, validation, and patch evidence.
+- Arrows = handoffs between Claude and Codex.
+
+Tool mapping:
+
+| Flow Step | Preferred Tooling | Bundled Fallback |
+|---|---|---|
+| 1-2 Discover / Scope | Superpowers brainstorming, `/idea-hours`, Codex repo scan | `agentic-lightweight-loop` |
+| 3-4 Spec / Validate | DAE / framework spec, Codex spec validation | `agentic-formal-feature` |
+| 5-6 Plan Review | gstack `/plan-eng-review`, `/plan-devex-review`, Superpowers write-plans | `agentic-formal-feature` plus `agentic-role-review` |
+| 7-10 Implement / Checkpoint | Codex TDD execution, Claude checkpoint review | `agentic-lightweight-loop` or `agentic-formal-feature` |
+| 11-12 Adversarial Review | Claude adversarial framework review, Codex fixes | `framework-contract-review` plus `agentic-role-review` |
+| 13-14 Final Validation | compatibility/perf/security/docs review, Codex evidence | `framework-contract-review` |
+| 15-16 Ship / Learn | gstack `/ship`, Superpowers finish branch, Codex reflection | `agentic-role-review`; update `AGENTS.md` / skills when reusable lessons emerge |
+
 ## Bundled Local Skills
 
 This repo includes Codex-native skills under `.agents/skills/` and a Claude Code compatibility mirror under `.claude/skills/`:
