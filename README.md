@@ -175,10 +175,30 @@ Command mapping:
 | Performance | `/benchmark` | `framework-contract-review` Performance Regression Guard |
 | Release readiness | `/ship`, `/land-and-deploy` | `agentic-role-review` Release Manager lens |
 
-Fallback prompt for Codex:
+How to invoke the fallback skill:
+
+Codex path invocation, most explicit:
 
 ```text
 Use .agents/skills/agentic-role-review/SKILL.md and AGENTS.md. Run a gstack-style review of this plan/diff across product, architecture, devex, API compatibility, lifecycle/concurrency, performance, security, QA, docs, test matrix, and release readiness. Findings first.
+```
+
+Codex skill-name invocation, after Codex discovers `.agents/skills`:
+
+```text
+Use the agentic-role-review skill. Run a gstack-style review of this plan/diff. Findings first, ordered by severity, with file/line references where possible.
+```
+
+Claude Code compatibility invocation:
+
+```text
+Use .claude/skills/agentic-role-review/SKILL.md. Run the same gstack-style review lenses. Findings first.
+```
+
+Minimal fallback prompt:
+
+```text
+Use the agentic-role-review skill for a gstack-style pre-ship review.
 ```
 
 ## Default Prompts

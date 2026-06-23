@@ -164,6 +164,20 @@ Use this sequence with the bundled skills:
 4. Run gstack review/QA/security/benchmark/ship commands if installed.
 5. If gstack is unavailable, invoke `agentic-role-review` and ask for the same lenses explicitly.
 
+Fallback invocation examples:
+
+```text
+Use .agents/skills/agentic-role-review/SKILL.md and AGENTS.md. Run a gstack-style review of this plan/diff across product, architecture, devex, API compatibility, lifecycle/concurrency, performance, security, QA, docs, test matrix, and release readiness. Findings first.
+```
+
+```text
+Use the agentic-role-review skill for a gstack-style pre-ship review.
+```
+
+```text
+Use .claude/skills/agentic-role-review/SKILL.md. Run the same gstack-style review lenses. Findings first.
+```
+
 ## Superpowers / GSD / Context Engineering
 
 Use these as methodology shapes:
