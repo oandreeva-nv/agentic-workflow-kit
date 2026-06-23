@@ -123,6 +123,33 @@ python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github
 
 Restart Codex after adding or installing skills if they do not appear automatically.
 
+### Use A Particular Codex Skill
+
+Start Codex from the project root so `.agents/skills` is scanned. Then use one of these patterns:
+
+```text
+Use .agents/skills/agentic-formal-feature/SKILL.md and AGENTS.md for this task.
+```
+
+```text
+Use the agentic-role-review skill from .agents/skills. Review this diff for API compatibility, lifecycle/concurrency, performance, security, test matrix, docs, and release readiness. Findings first.
+```
+
+If your Codex surface supports skill discovery, check the loaded skills with:
+
+```text
+/skills
+```
+
+Expected bundled skills:
+
+```text
+agentic-lightweight-loop
+agentic-formal-feature
+agentic-role-review
+framework-contract-review
+```
+
 ## gstack-Style Reviews
 
 If gstack is installed, use these around planning and before shipping:
