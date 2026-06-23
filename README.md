@@ -89,31 +89,39 @@ Use DAE for risky features, not routine cleanup.
 
 ## Codex Skills
 
-Codex always reads relevant `AGENTS.md` guidance. Repo-local Codex skills live in `.agents/skills/`; launch Codex from the project so those skills are discoverable. Additional user-level Codex skills can be installed into `~/.agents/skills` or via the skill installer.
+Codex uses two durable instruction surfaces here:
 
-`openai/skills` is deprecated in favor of current plugin examples, but it can still be useful for curated local installs. List curated Codex skills:
+- `AGENTS.md` for project conventions, commands, and review expectations.
+- `.agents/skills/<skill-name>/SKILL.md` for reusable, task-specific workflows that Codex can invoke explicitly or implicitly.
 
-```bash
-python ~/.codex/skills/.system/skill-installer/scripts/list-skills.py
+For this repo, the bundled Codex-native skills are already checked in under `.agents/skills/`. Copy that directory into a project and start Codex from the project root so the skills are discoverable.
+
+For personal skills that should apply across projects, put them in:
+
+```text
+~/.agents/skills/<skill-name>/SKILL.md
 ```
 
-Install a curated skill:
+For reusable distribution to other developers, prefer packaging skills as a Codex plugin. The older `openai/skills` catalog is deprecated; use it only for local experimentation with legacy curated or experimental skills.
+
+Legacy local install examples:
 
 ```bash
+# List legacy curated skills
+python ~/.codex/skills/.system/skill-installer/scripts/list-skills.py
+
+# Install a legacy curated skill
 python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
   --repo openai/skills \
   --path skills/.curated/<skill-name>
-```
 
-Install an experimental skill:
-
-```bash
+# Install a legacy experimental skill
 python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
   --repo openai/skills \
   --path skills/.experimental/<skill-name>
 ```
 
-Restart Codex after installing skills.
+Restart Codex after adding or installing skills if they do not appear automatically.
 
 ## gstack-Style Reviews
 

@@ -56,7 +56,9 @@ Codex reads `AGENTS.md` and can invoke repo-local skills from `.agents/skills` i
 Use .agents/skills/agentic-formal-feature/SKILL.md and AGENTS.md for this task.
 ```
 
-To install user-level Codex skills from the deprecated `openai/skills` catalog for local experimentation, use:
+Use `.agents/skills` for project-scoped skills and `~/.agents/skills` for personal skills that should apply across projects. For reusable distribution to other developers, prefer packaging skills as a Codex plugin.
+
+The older `openai/skills` catalog is deprecated. Use it only for local experimentation with legacy curated or experimental skills:
 
 ```bash
 python ~/.codex/skills/.system/skill-installer/scripts/list-skills.py
@@ -65,4 +67,4 @@ python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github
   --path skills/.curated/<skill-name>
 ```
 
-Restart Codex after installing new user-level Codex skills.
+Restart Codex after adding or installing skills if they do not appear automatically.
