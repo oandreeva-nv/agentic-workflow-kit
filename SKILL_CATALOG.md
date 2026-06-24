@@ -19,13 +19,13 @@ These are not bundled here. This repo provides prompts, command mappings, and lo
 
 | External System | Status In This Repo | How To Use |
 |---|---|---|
-| Disciplined Agentic Engineering / ATDD | Install separately as Claude Code plugins | Use `/plugin marketplace add swingerman/disciplined-agentic-engineering`, then install `engineer`, `atdd`, and `crap-analyzer` |
-| gstack | Optional external package/plugin; not bundled here | Install from your team/vendor source in the surface that supports its slash commands. Use real commands for plan/review/QA/security/ship checks. If unavailable, invoke `.agents/skills/agentic-role-review/SKILL.md` or ask for `agentic-role-review` by name. |
-| Superpowers | Install separately if you use that pack | Use `agentic-formal-feature` as the local fallback shape: brainstorm -> clarify -> plan -> isolate -> TDD -> review -> finish |
-| GSD Core / Get Shit Done | Install separately if you use that pack | Use `agentic-formal-feature` as the local fallback for phase control and spec/context engineering |
+| Disciplined Agentic Engineering / ATDD | Install separately as Claude Code plugins; Codex uses handoff prompts or local skills | See `docs/DAE_README.md` |
+| gstack | Optional external package/plugin; not bundled here | See `docs/GSTACK_README.md` |
+| Superpowers | Install separately if you use that pack | See `docs/SUPERPOWERS_README.md` |
+| GSD Core / Get Shit Done | Install separately if you use that pack | See `docs/GSD_CORE_README.md` |
 | Context Engineering Kit | Install separately if you use that pack | Use `agentic-formal-feature` and `agentic-role-review` as local substitutes |
-| Context7 or official-doc lookup | Configure in your agent/editor environment | Use for external APIs and fast-changing docs before relying on memory |
-| ponytail | Not bundled; no verified install source is encoded here | Add an adapter skill once your local ponytail installation and commands are known |
+| Context7 or official-doc lookup | Configure in your agent/editor environment | See `docs/DOCS_LOOKUP_README.md` |
+| ponytail | Not bundled; no verified install source is encoded here | See `docs/PONYTAIL_README.md` |
 | `openai/skills` | Deprecated upstream catalog; still useful as a source for curated local installs | Prefer current plugin examples for distribution; use `$skill-installer` only for local experimentation |
 
 ## Install Into A Project
@@ -35,6 +35,7 @@ Copy the files into a project:
 ```bash
 cp AGENTS.md CLAUDE.md SKILL_CATALOG.md /path/to/project/
 mkdir -p /path/to/project/.agents /path/to/project/.claude /path/to/project/.codex
+cp -R docs /path/to/project/
 cp -R .agents/skills /path/to/project/.agents/
 cp -R .claude/AGENTIC_WORKFLOW.md .claude/README.md .claude/skills /path/to/project/.claude/
 cp .codex/AGENTS.md /path/to/project/.codex/

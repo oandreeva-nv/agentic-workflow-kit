@@ -119,42 +119,11 @@ Review this diff as:
 Report findings first, with file and line references.
 ```
 
-## DAE / ATDD for Claude Code
+## DAE / ATDD
 
-Install the Disciplined Agentic Engineering marketplace in Claude Code:
+DAE/ATDD has its own dedicated guide in `../docs/DAE_README.md`. Use that file for upstream Claude Code plugin installation, the Claude-only command boundary, Codex handoff prompts, and Codex-native porting options.
 
-```text
-/plugin marketplace add swingerman/disciplined-agentic-engineering
-/plugin install engineer@disciplined-agentic-engineering
-/plugin install atdd@disciplined-agentic-engineering
-/plugin install crap-analyzer@disciplined-agentic-engineering
-```
-
-Local test option:
-
-```bash
-git clone https://github.com/swingerman/disciplined-agentic-engineering.git
-claude --plugin-dir ./disciplined-agentic-engineering
-```
-
-DAE feature flow:
-
-```text
-/engineer.onboard          # one-time project charter, manifest, tracker, features/
-/engineer.discuss          # brainstorm and decide drop / park / promote
-/engineer.feature-init     # create Ready feature folder and branch
-/engineer.prime-context    # load context for the Ready feature
-/engineer.discover-acs     # acceptance criteria interview
-/engineer.atdd             # bridge ACs into Gherkin and ATDD
-/engineer.plan             # architecture plan and charter check
-/atdd:atdd-team            # implement with acceptance + unit test streams
-/engineer.refine           # reuse / quality / efficiency review
-/engineer.arch-check       # charter architecture fitness
-/atdd:mutate               # optional mutation hardening
-/engineer.session-summary  # durable handoff
-```
-
-Use DAE for risky feature work, not routine typo fixes.
+Short rule: run upstream `/engineer.*` and `/atdd:*` commands in Claude Code; use Codex to validate repo fit, implement approved DAE plans, run tests, and report evidence.
 
 ## gstack-Style Review Layer
 

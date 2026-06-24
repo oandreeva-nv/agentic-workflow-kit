@@ -59,4 +59,4 @@ Apply these lenses before declaring framework-level or reusable infrastructure w
 - **gstack-like review**: product challenge, architecture review, QA, security review, benchmark review, and ship readiness.
 - **Docs lookup**: use repo docs and source first. For external or fast-changing APIs, use Context7 or equivalent official-docs lookup before relying on memory.
 
-See `.claude/AGENTIC_WORKFLOW.md` for command examples, `.agents/skills/*/SKILL.md` for Codex-native skills, `.claude/skills/*/SKILL.md` for the Claude compatibility mirror, and `SKILL_CATALOG.md` for the external tool inventory.
+See `.claude/AGENTIC_WORKFLOW.md` for command examples, `docs/DAE_README.md` for DAE/ATDD usage, `.agents/skills/*/SKILL.md` for Codex-native skills, `.claude/skills/*/SKILL.md` for the Claude compatibility mirror, and `SKILL_CATALOG.md` for the external tool inventory.

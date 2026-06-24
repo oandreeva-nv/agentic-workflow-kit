@@ -10,6 +10,8 @@ The kit is intentionally project-agnostic. Copy it into a workspace or project r
 AGENTS.md                       # portable workflow policy for coding agents
 CLAUDE.md                       # Claude Code entrypoint that imports AGENTS.md
 SKILL_CATALOG.md                # explicit inventory of bundled and external skills
+docs/README.md                  # index of dedicated stack-layer guides
+docs/*_README.md               # dedicated stack-layer guides
 .claude/AGENTIC_WORKFLOW.md     # canonical commands, prompts, and workflow guide
 .claude/README.md               # short Claude Code orientation
 assets/two-agent-framework-loop.svg    # lifecycle diagram asset
@@ -25,6 +27,7 @@ From this repository:
 ```bash
 cp AGENTS.md CLAUDE.md SKILL_CATALOG.md /path/to/project/
 mkdir -p /path/to/project/.agents /path/to/project/.claude /path/to/project/.codex /path/to/project/assets
+cp -R docs /path/to/project/
 cp assets/two-agent-framework-loop.svg /path/to/project/assets/
 cp .claude/AGENTIC_WORKFLOW.md .claude/README.md /path/to/project/.claude/
 cp -R .agents/skills /path/to/project/.agents/
@@ -57,7 +60,10 @@ See `SKILL_CATALOG.md` for the full inventory and external install notes.
 
 ## Usage Docs
 
-- `.claude/AGENTIC_WORKFLOW.md`: canonical operating guide for the two-agent loop, DAE/ATDD, gstack-style review, fallback prompts, and Claude/Codex handoffs.
+- `.claude/AGENTIC_WORKFLOW.md`: canonical operating guide for the two-agent loop, gstack-style review, fallback prompts, and Claude/Codex handoffs.
+- `docs/README.md`: index for all dedicated stack-layer guides.
+- `docs/DAE_README.md`: DAE/ATDD install, Claude Code boundaries, Codex handoff prompts, and Codex-native porting options.
+- `docs/*_README.md`: dedicated guides for Superpowers, ponytail, gstack, GSD Core, repo guidance, framework skills, review/security tooling, and docs lookup.
 - `SKILL_CATALOG.md`: bundled skill inventory, external tool notes, and Codex skill invocation examples.
 - `AGENTS.md`: portable repo guidance for coding agents.
 - `CLAUDE.md`: Claude Code entrypoint that imports the shared guidance.
