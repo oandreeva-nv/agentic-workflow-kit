@@ -62,13 +62,85 @@ Legend:
 
 ### Skill Selection Rules
 
-- Use [agentic-lightweight-loop](../.agents/skills/agentic-lightweight-loop/SKILL.md) when the task is routine and the risk is local.
-- Use [agentic-formal-feature](../.agents/skills/agentic-formal-feature/SKILL.md) when the task needs a contract, acceptance criteria, TDD, or a reviewable plan.
-- Use [agentic-role-review](../.agents/skills/agentic-role-review/SKILL.md) when you need [gstack-style](GSTACK_README.md) product, architecture, devex, QA, security, performance, docs, and release lenses.
-- Use [framework-contract-review](../.agents/skills/framework-contract-review/SKILL.md) when public API, compatibility, lifecycle/concurrency, performance, docs, test matrix, or release risk matters.
-- Use [DAE/ATDD](DAE_README.md) for high-risk features that justify checkpoint artifacts and acceptance-test discipline.
-- Use [Context7 or equivalent docs lookup](DOCS_LOOKUP_README.md) when external APIs, SDKs, or fast-changing behavior are involved.
-- Use [framework-specific custom skills](FRAMEWORK_SKILLS_README.md) when a project has durable framework rules beyond the generic skills.
+Start with the smallest skill that covers the risk. Escalate when the work touches durable contracts, broad behavior, security, release readiness, or fast-changing external dependencies. Multiple skills can apply in sequence, but each one should have a clear job.
+
+#### Quick Selection Table
+
+| Use this | Best for | Expected output |
+| --- | --- | --- |
+| [agentic-lightweight-loop](../.agents/skills/agentic-lightweight-loop/SKILL.md) | Routine bug fixes, small features, local refactors, docs cleanup, test-only changes. | Scope recap, narrow plan, focused patch, validation evidence, handoff notes. |
+| [agentic-formal-feature](../.agents/skills/agentic-formal-feature/SKILL.md) | Feature-level work that needs a contract, acceptance criteria, TDD, architecture plan, migration plan, or explicit approval before implementation. | Ready contract, acceptance criteria, test strategy, implementation plan, validation evidence. |
+| [agentic-role-review](../.agents/skills/agentic-role-review/SKILL.md) | [gstack-style](GSTACK_README.md) product, architecture, devex, QA, security, performance, docs, and release review of a plan or diff. | Findings first, severity ordering, file and line references when reviewing code, open questions, ship recommendation. |
+| [framework-contract-review](../.agents/skills/framework-contract-review/SKILL.md) | Framework, SDK, library, plugin, API, or platform changes where downstream users depend on stable behavior. | Blockers and remediations across API contract, compatibility, error model, lifecycle/concurrency, performance, security, docs, test matrix, and release readiness. |
+| [DAE/ATDD](DAE_README.md) | High-risk work that justifies formal checkpoint artifacts and acceptance-test discipline. | Human-signed charter, Ready artifacts, Gherkin or ATDD specs, architecture plan, dual test streams, mutation or hardening evidence when available. |
+| [Context7 or equivalent docs lookup](DOCS_LOOKUP_README.md) | External APIs, SDKs, CLIs, deployment platforms, package behavior, or anything likely to change outside the repo. | Current documented facts, links or citations when available, and implementation implications. |
+| [framework-specific custom skills](FRAMEWORK_SKILLS_README.md) | Durable project or framework rules that should travel between repos and be reused by future agents. | A reusable `SKILL.md`, plugin package, or repo-local skill with trigger rules and workflow instructions. |
+
+#### Escalation Ladder
+
+1. Always start with repo guidance: `AGENTS.md`, `CLAUDE.md`, and nearest local instructions.
+2. If the task is small and local, use [agentic-lightweight-loop](../.agents/skills/agentic-lightweight-loop/SKILL.md).
+3. If the task needs a spec, acceptance criteria, TDD, architecture choices, or approval gates, use [agentic-formal-feature](../.agents/skills/agentic-formal-feature/SKILL.md).
+4. If the task needs independent challenge or pre-ship scrutiny, use [agentic-role-review](../.agents/skills/agentic-role-review/SKILL.md) or real [gstack](GSTACK_README.md) commands if installed.
+5. If the task touches a public framework contract, use [framework-contract-review](../.agents/skills/framework-contract-review/SKILL.md) even if the code change looks small.
+6. If the task is high-risk enough to require signed checkpoints or ATDD discipline, use [DAE/ATDD](DAE_README.md) before implementation.
+7. If the task relies on external tools, SDKs, or documentation, use [Context7 or equivalent docs lookup](DOCS_LOOKUP_README.md) before coding or reviewing.
+8. If the same rule keeps recurring across projects, turn it into a [framework-specific custom skill](FRAMEWORK_SKILLS_README.md).
+
+#### Common Combinations
+
+| Situation | Recommended sequence |
+| --- | --- |
+| Small local bug | `AGENTS.md` + [agentic-lightweight-loop](../.agents/skills/agentic-lightweight-loop/SKILL.md). |
+| New application feature | [agentic-formal-feature](../.agents/skills/agentic-formal-feature/SKILL.md) for spec and implementation, then [agentic-role-review](../.agents/skills/agentic-role-review/SKILL.md) before handoff. |
+| Framework or SDK API change | [agentic-formal-feature](../.agents/skills/agentic-formal-feature/SKILL.md), then [framework-contract-review](../.agents/skills/framework-contract-review/SKILL.md), then [agentic-role-review](../.agents/skills/agentic-role-review/SKILL.md) for final challenge. |
+| DAE hybrid flow | Run upstream DAE commands in Claude Code, then hand the approved plan to Codex with [agentic-formal-feature](../.agents/skills/agentic-formal-feature/SKILL.md), followed by [framework-contract-review](../.agents/skills/framework-contract-review/SKILL.md) or [agentic-role-review](../.agents/skills/agentic-role-review/SKILL.md). |
+| External dependency or docs-sensitive change | [Context7 or equivalent docs lookup](DOCS_LOOKUP_README.md), then [agentic-lightweight-loop](../.agents/skills/agentic-lightweight-loop/SKILL.md) or [agentic-formal-feature](../.agents/skills/agentic-formal-feature/SKILL.md) depending on risk. |
+| Security, release, or production readiness pass | Real scanner or review tooling if installed, plus [agentic-role-review](../.agents/skills/agentic-role-review/SKILL.md); add [framework-contract-review](../.agents/skills/framework-contract-review/SKILL.md) for framework releases. |
+
+#### Invocation Examples
+
+Use a named skill directly when the agent supports skills:
+
+```text
+Use agentic-lightweight-loop for this small bug fix. Follow AGENTS.md, make the narrowest patch, run focused tests, and report validation evidence.
+```
+
+```text
+Use agentic-formal-feature. Draft the Ready contract, acceptance criteria, implementation plan, and test matrix before coding.
+```
+
+```text
+Use agentic-role-review. Review this plan or diff across product, architecture, devex, QA, security, performance, docs, and release readiness. Findings first.
+```
+
+```text
+Use framework-contract-review. Treat this as a framework API change and identify compatibility, lifecycle, error-model, performance, docs, test-matrix, and release risks.
+```
+
+Use product tools when they are installed:
+
+```text
+/plan-eng-review
+/plan-devex-review
+/review
+/qa
+/cso
+/ship
+```
+
+Use fallback prompts when the tool is not installed:
+
+```text
+Read .agents/skills/agentic-role-review/SKILL.md and AGENTS.md. Run the same review shape that gstack /review or /ship would provide. Findings first, severity ordered, with concrete remediation.
+```
+
+#### Stop Conditions
+
+- Do not use DAE/ATDD or formal planning for typo fixes, simple docs edits, or isolated test updates unless the user asks for it.
+- Do not claim that gstack, Context7, DAE, scanners, or CI ran unless the actual tool ran.
+- Do not create a framework-specific custom skill for a one-off instruction; create one when the rule should travel across repos.
+- If a lightweight task reveals public API, migration, security, or release risk, escalate before continuing implementation.
 
 ## Default Prompts
 

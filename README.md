@@ -37,13 +37,9 @@ cp .codex/AGENTS.md /path/to/project/.codex/
 
 Then add project-specific guidance in `/path/to/project/AGENTS.md` or a nested subsystem `AGENTS.md` as needed. Nearest guidance should override this portable workflow.
 
-## Two-Agent Framework Loop
+## Agentic Workflow Guide
 
-Use this loop for framework or library work where design quality, compatibility, testing, and release readiness matter. The diagram is role-based: Agent 1 handles interactive design and review; Agent 2 handles repo-grounded implementation and validation.
-
-Default Claude + Codex mapping: Agent 1 = Claude Code, Agent 2 = Codex. The generic stage matrix, skill mapping, prompts, and fallback instructions live in `docs/AGENTIC_WORKFLOW.md`.
-
-![Two-Agent Framework Development Loop](assets/two-agent-framework-loop.svg)
+Use `docs/AGENTIC_WORKFLOW.md` as the canonical guide for the recommended lifecycle, stage and skill matrix, role-review layer, invocation prompts, and agent handoff patterns. The root README intentionally only points to that guide so the workflow does not drift in two places.
 
 ## Bundled Local Skills
 
@@ -60,7 +56,7 @@ See `SKILL_CATALOG.md` for the full inventory and external install notes.
 
 ## Usage Docs
 
-- `docs/AGENTIC_WORKFLOW.md`: canonical operating guide for the two-agent loop, gstack-style review, fallback prompts, and Claude/Codex handoffs.
+- `docs/AGENTIC_WORKFLOW.md`: canonical operating guide for the generic agentic workflow, stage and skill matrix, review layer, fallback prompts, and handoff patterns.
 - `docs/README.md`: index for all dedicated stack-layer guides.
 - `docs/DAE_README.md`: DAE/ATDD install, Claude Code boundaries, Codex handoff prompts, and Codex-native porting options.
 - `docs/*_README.md`: dedicated guides for Superpowers, ponytail, gstack, GSD Core, repo guidance, framework skills, review/security tooling, and docs lookup.
