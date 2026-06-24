@@ -39,7 +39,7 @@ Then add project-specific guidance in `/path/to/project/AGENTS.md` or a nested s
 
 ## Agentic Workflow Guide
 
-Use `docs/AGENTIC_WORKFLOW.md` as the canonical guide for the recommended lifecycle, stage and skill matrix, role-review layer, invocation prompts, and agent handoff patterns. The root README intentionally only points to that guide so the workflow does not drift in two places.
+Use `docs/AGENTIC_WORKFLOW.md` as the canonical guide for the recommended lifecycle, stage/complexity matrix, situation playbooks, prompt library, and agent handoff patterns. The root README intentionally only points to that guide so the workflow does not drift in two places.
 
 ## Bundled Local Skills
 
@@ -56,7 +56,7 @@ See `SKILL_CATALOG.md` for the full inventory and external install notes.
 
 ## Usage Docs
 
-- `docs/AGENTIC_WORKFLOW.md`: canonical operating guide for the generic agentic workflow, stage and skill matrix, review layer, fallback prompts, and handoff patterns.
+- `docs/AGENTIC_WORKFLOW.md`: canonical operating guide for the generic agentic workflow, stage/complexity matrix, situation playbooks, prompt library, tool fallbacks, and handoff patterns.
 - `docs/README.md`: index for all dedicated stack-layer guides.
 - `docs/DAE_README.md`: DAE/ATDD install, Claude Code boundaries, Codex handoff prompts, and Codex-native porting options.
 - `docs/*_README.md`: dedicated guides for Superpowers, ponytail, gstack, GSD Core, repo guidance, framework skills, review/security tooling, and docs lookup.

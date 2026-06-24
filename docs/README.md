@@ -4,7 +4,7 @@ This directory owns topic-specific guidance for each workflow layer. Keep the ro
 
 | Guide | Topic |
 |---|---|
-| `AGENTIC_WORKFLOW.md` | Canonical two-agent development loop, stage matrix, prompts, and handoffs |
+| `AGENTIC_WORKFLOW.md` | Canonical agentic workflow, stage/complexity matrix, situation playbooks, prompts, and handoffs |
 | `DAE_README.md` | Disciplined Agentic Engineering / ATDD with Claude Code and Codex |
 | `SUPERPOWERS_README.md` | Superpowers product, marketplace install, commands, and Codex handoff |
 | `PONYTAIL_README.md` | Ponytail product, install paths, commands, and Codex use |
