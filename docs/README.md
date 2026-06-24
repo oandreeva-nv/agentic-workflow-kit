@@ -1,15 +1,16 @@
 # Dedicated Workflow Guides
 
-This directory owns topic-specific guidance for each workflow layer. Keep the root `README.md` as the project overview and install guide; keep detailed operating guidance here or in `.claude/AGENTIC_WORKFLOW.md`.
+This directory owns topic-specific guidance for each workflow layer. Keep the root `README.md` as the project overview and install guide; keep detailed operating guidance here.
 
 | Guide | Topic |
 |---|---|
+| `AGENTIC_WORKFLOW.md` | Canonical two-agent development loop, stage matrix, prompts, and handoffs |
 | `DAE_README.md` | Disciplined Agentic Engineering / ATDD with Claude Code and Codex |
-| `SUPERPOWERS_README.md` | Superpowers-style methodology and local fallbacks |
-| `PONYTAIL_README.md` | Ponytail placeholder, status, and adapter rules |
-| `GSTACK_README.md` | gstack-style review, QA, security, and ship layer |
-| `GSD_CORE_README.md` | GSD Core / Get Shit Done phase-control loop |
-| `AGENTS_CLAUDE_README.md` | Repo `AGENTS.md`, `CLAUDE.md`, and guidance layering |
-| `FRAMEWORK_SKILLS_README.md` | Framework-specific custom skill design |
-| `CODE_SECURITY_REVIEW_README.md` | Code review and security review tooling |
-| `DOCS_LOOKUP_README.md` | Context7 or equivalent official-docs lookup |
+| `SUPERPOWERS_README.md` | Superpowers product, marketplace install, commands, and Codex handoff |
+| `PONYTAIL_README.md` | Ponytail product, install paths, commands, and Codex use |
+| `GSTACK_README.md` | gstack product, install paths, slash commands, and Codex host setup |
+| `GSD_CORE_README.md` | GSD Core product, installer, phase loop, and runtime usage |
+| `AGENTS_CLAUDE_README.md` | Codex `AGENTS.md`, Claude `CLAUDE.md`, sources, and usage |
+| `FRAMEWORK_SKILLS_README.md` | Codex/agent skills product surfaces and custom skill packaging |
+| `CODE_SECURITY_REVIEW_README.md` | gstack, Codex review/security surfaces, install, and usage |
+| `DOCS_LOOKUP_README.md` | Context7 product, CLI/MCP install, commands, and docs lookup usage |

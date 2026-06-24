@@ -1,49 +1,66 @@
 # GSD Core / Get Shit Done
 
-This guide documents the lightweight spec and phase-control layer.
+GSD Core is an open-source meta-prompting, context-engineering, and spec-driven development system for Claude Code, OpenCode, Gemini CLI, Kimi CLI, Kilo, Codex, Copilot, Cursor, Windsurf, and more.
 
-## Status In This Kit
+## Upstream
 
-GSD Core is treated as a methodology shape, not a bundled dependency. This kit implements the practical version through `AGENTS.md` and the local skills.
+| Resource | Link |
+|---|---|
+| GitHub repo | https://github.com/open-gsd/gsd-core |
+| npm package | https://www.npmjs.com/package/@opengsd/gsd-core |
 
-## Role In The Stack
+## What It Does
 
-GSD is the low-overhead spine for most agent work:
-
-```text
-context -> scope -> plan -> implement -> verify -> handoff
-```
-
-Use it when DAE or Superpowers would be too heavy, but direct editing would be too loose.
-
-## Codex Invocation
+GSD Core runs a disciplined phase loop for each milestone:
 
 ```text
-Use AGENTS.md and .agents/skills/agentic-lightweight-loop/SKILL.md.
-Run a GSD-style loop: gather context, state scope and non-goals, propose a narrow plan, implement the smallest safe patch, verify with relevant commands, and summarize evidence plus residual risk.
+Discuss -> Plan -> Execute -> Verify -> Ship
 ```
 
-For higher-risk work:
+The upstream README frames it as a context-engineering system that keeps the main session lean while heavy research, planning, and execution happen in fresh-context subagents.
+
+## Install
+
+```bash
+npx @opengsd/gsd-core@latest
+```
+
+The installer prompts for runtime and whether to install globally or locally. The upstream README explicitly says to use the installer for cross-runtime compatibility and not to copy files from `agents/` or `commands/` directly.
+
+## Use
+
+Start a first project:
+
+```text
+/gsd-new-project
+```
+
+Then follow the phase loop:
+
+```text
+Discuss -> Plan -> Execute -> Verify -> Ship
+```
+
+Useful upstream docs:
+
+| Topic | Link |
+|---|---|
+| Install on your runtime | https://github.com/open-gsd/gsd-core/blob/main/docs/how-to/install-on-your-runtime.md |
+| Your first project | https://github.com/open-gsd/gsd-core/blob/main/docs/tutorials/your-first-project.md |
+| Commands reference | https://github.com/open-gsd/gsd-core/blob/main/docs/COMMANDS.md |
+| Configuration | https://github.com/open-gsd/gsd-core/blob/main/docs/CONFIGURATION.md |
+
+## Codex Use
+
+Install GSD Core with the upstream installer and choose Codex when prompted. If you do not have GSD installed, use this repo's formal feature skill as a local substitute:
 
 ```text
 Use AGENTS.md and .agents/skills/agentic-formal-feature/SKILL.md.
-Run a GSD-style formal feature flow: Ready contract, acceptance criteria, plan, test matrix, implementation, validation, and handoff.
+Run a GSD-style loop: discuss/context, plan, execute, verify, and ship handoff. Keep phase outputs explicit and do not implement before the validation plan is clear.
 ```
 
-## Phase Rules
+## Notes
 
-| Phase | Required Output |
-|---|---|
-| Context | files, tests, constraints, relevant docs |
-| Scope | behavior change, non-goals, risk |
-| Plan | ordered patch steps and validation plan |
-| Implement | narrow diff, no unrelated cleanup |
-| Verify | commands run and results |
-| Handoff | changed behavior, evidence, risks, next action |
-
-## Guardrails
-
-- Keep the loop lightweight.
-- Do not ask for a full spec when scope is already obvious and low risk.
-- Do not implement before stating the validation plan for risky work.
-- Do not let phase labels become a substitute for tests or review.
+- GSD Core is an actual product with a runtime installer.
+- Prefer the installer over copying files manually.
+- Keep GSD artifacts in the repo only when they are intended to be durable project context.

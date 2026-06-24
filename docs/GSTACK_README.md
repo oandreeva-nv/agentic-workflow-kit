@@ -1,65 +1,83 @@
-# gstack-Style Reviews
+# gstack
 
-This guide documents how this kit uses gstack as an optional review, QA, security, and ship layer.
+gstack is Garry Tan's Claude Code setup for turning Claude Code into a virtual product/engineering/release team. It provides specialist slash commands for product challenge, architecture review, design review, QA, security, performance, documentation, and shipping.
 
-## Status In This Kit
+## Upstream
 
-gstack is not bundled here. Install it separately from your team or vendor source in the agent surface that supports its slash commands, usually Claude Code. If gstack is unavailable, use the local fallback skill `agentic-role-review`.
+| Resource | Link |
+|---|---|
+| GitHub repo | https://github.com/garrytan/gstack |
 
-## Role In The Stack
+## Install
 
-Use gstack after scope or plan drafting and again before handoff or release:
+### Claude Code
 
-```text
-plan challenge -> engineering review -> QA/security/perf review -> ship readiness
-```
-
-## Commands When gstack Is Installed
+The upstream README documents this install prompt for Claude Code:
 
 ```text
-/office-hours              # product challenge and problem framing
-/autoplan                  # initial patch plan
-/plan-eng-review           # architecture review
-/plan-devex-review         # developer experience review
-/review                    # code review
-/devex-review              # developer experience review
-/qa                        # QA pass
-/qa-only                   # QA-only pass
-/cso                       # security review
-/benchmark                 # performance check
-/ship                      # release readiness
-/land-and-deploy           # final ship/deploy flow
+Install gstack: run `git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git ~/.claude/skills/gstack && cd ~/.claude/skills/gstack && ./setup` then add a "gstack" section to CLAUDE.md that says to use the /browse skill from gstack for all web browsing, never use mcp__claude-in-chrome__* tools, and lists the available skills.
 ```
 
-## Local Fallback Mapping
+Team mode from inside a repo:
 
-| Need | gstack Command | Local Fallback |
-|---|---|---|
-| Product challenge | `/office-hours` | `agentic-role-review` Product Challenger |
-| Initial plan | `/autoplan` | `agentic-formal-feature` plan |
-| Engineering review | `/plan-eng-review`, `/review` | `agentic-role-review` architecture/API/lifecycle lenses |
-| Developer experience | `/plan-devex-review`, `/devex-review` | `agentic-role-review` devex/error model lenses |
-| QA | `/qa`, `/qa-only` | `agentic-role-review` QA/test matrix lenses |
-| Security | `/cso` | `agentic-role-review` security and abuse lens |
-| Performance | `/benchmark` | `framework-contract-review` performance guard |
-| Release readiness | `/ship`, `/land-and-deploy` | `agentic-role-review` release manager lens |
+```bash
+(cd ~/.claude/skills/gstack && ./setup --team) && ~/.claude/skills/gstack/bin/gstack-team-init required && git add .claude/ CLAUDE.md && git commit -m "require gstack for AI-assisted work"
+```
 
-## Codex Fallback Invocation
+Use `optional` instead of `required` if you want to nudge teammates rather than block them.
+
+### Codex And Other Agents
+
+gstack also documents multi-host setup:
+
+```bash
+git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git ~/gstack
+cd ~/gstack && ./setup
+```
+
+Target Codex explicitly:
+
+```bash
+./setup --host codex
+```
+
+The upstream README says Codex skills install to `~/.codex/skills/gstack-*/`.
+
+## Use
+
+Quick-start commands from upstream:
+
+```text
+/office-hours
+/plan-ceo-review
+/plan-eng-review
+/review
+/qa
+/ship
+```
+
+Common command groups:
+
+| Need | Commands |
+|---|---|
+| Product and planning | `/office-hours`, `/autoplan`, `/plan-ceo-review`, `/plan-eng-review`, `/plan-design-review`, `/plan-devex-review` |
+| Engineering review | `/review`, `/devex-review`, `/careful`, `/freeze`, `/guard`, `/unfreeze` |
+| QA and investigation | `/qa`, `/qa-only`, `/investigate`, `/benchmark`, `/canary` |
+| Security | `/cso` |
+| Shipping | `/ship`, `/land-and-deploy`, `/document-release`, `/document-generate`, `/retro` |
+| Tooling | `/browse`, `/connect-chrome`, `/setup-deploy`, `/gstack-upgrade`, `/learn`, `/codex` |
+
+## Codex Fallback
+
+If real gstack is not installed, use this repo's local review skill:
 
 ```text
 Use .agents/skills/agentic-role-review/SKILL.md and AGENTS.md.
-Run a gstack-style review of this plan/diff across product, architecture, devex, API compatibility, lifecycle/concurrency, performance, security, QA, docs, test matrix, and release readiness. Findings first, ordered by severity, with file/line references where possible.
+Run a gstack-style review of this plan/diff across product, architecture, devex, API compatibility, lifecycle/concurrency, performance, security, QA, docs, test matrix, and release readiness. Findings first.
 ```
 
-Short form:
+## Notes
 
-```text
-Use the agentic-role-review skill for a gstack-style pre-ship review.
-```
-
-## Guardrails
-
-- Findings first; summary second.
-- Do not treat review roles as approval unless blockers are resolved.
-- Do not claim real gstack ran unless the gstack command actually ran.
-- Escalate to `framework-contract-review` for public API, lifecycle, compatibility, or release-risk changes.
+- gstack is an installable product. Do not claim it ran unless the command actually ran.
+- If installed for Codex, invoke the installed gstack skills using the Codex skill/plugin UI for your surface.
+- Use this repo's fallback only when gstack is absent.

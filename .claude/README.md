@@ -6,7 +6,7 @@ Start Claude Code at the workspace or project root, then read:
 
 ```text
 AGENTS.md
-.claude/AGENTIC_WORKFLOW.md
+docs/AGENTIC_WORKFLOW.md
 docs/README.md
 docs/DAE_README.md
 ```

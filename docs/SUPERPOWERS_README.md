@@ -1,75 +1,63 @@
-# Superpowers Workflow
+# Superpowers
 
-This guide documents how this kit uses Superpowers-style methodology.
+Superpowers is a Claude Code plugin family by Jesse Vincent / `obra`. It provides a curated methodology and skills layer for Claude Code: brainstorming, planning, TDD, debugging, collaboration, plan execution, review, and branch finishing.
 
-## Status In This Kit
+## Upstream
 
-Superpowers is treated as an external methodology backbone. This repo does not install an upstream Superpowers package. Instead, it provides local fallback skills that preserve the same shape:
-
-| Need | Local Fallback |
+| Resource | Link |
 |---|---|
-| Brainstorming and scope clarification | `agentic-lightweight-loop` |
-| Formal plans and TDD execution | `agentic-formal-feature` |
-| Role-based review before handoff | `agentic-role-review` |
-| Framework/API hardening | `framework-contract-review` |
+| Marketplace | https://github.com/obra/superpowers-marketplace |
+| Core plugin repo | https://github.com/obra/superpowers |
+| Community skills repo | https://github.com/obra/superpowers-skills |
 
-## When To Use
+## Install
 
-Use this layer when a task needs more discipline than a direct edit, but does not necessarily need the full DAE checkpoint pipeline.
-
-Good fits:
-
-- non-trivial feature work
-- public API or framework behavior changes
-- refactors with test risk
-- ambiguous tasks needing discovery before implementation
-- work that benefits from a written plan before edits
-
-Use a lighter loop for small bug fixes, comments, formatting, or isolated docs edits.
-
-## Expected Flow
+Install the marketplace in Claude Code:
 
 ```text
-brainstorm -> clarify spec -> write plan -> isolate work -> TDD -> execute plan -> review -> finish branch
+/plugin marketplace add obra/superpowers-marketplace
 ```
 
-If you use a real Superpowers installation, run the upstream commands in the agent surface that supports them. If it is unavailable, use the local skills and prompts below.
+Install the core Superpowers plugin:
 
-## Codex Invocation
+```text
+/plugin install superpowers@superpowers-marketplace
+```
+
+The marketplace README says the core plugin provides 20+ skills, `/brainstorm`, `/write-plan`, `/execute-plan`, skills-search, and session-start context injection.
+
+## Use
+
+Typical Claude Code flow:
+
+```text
+/brainstorm
+/write-plan
+/execute-plan
+```
+
+Use Superpowers when you want a methodology backbone before implementation: clarify intent, write a reviewable plan, execute incrementally, and review/finish the branch.
+
+## Codex Use
+
+Superpowers itself is a Claude Code plugin. In Codex, use the methodology through local skills or by passing Superpowers-generated artifacts into Codex:
 
 ```text
 Use AGENTS.md and .agents/skills/agentic-formal-feature/SKILL.md.
-Run this with a Superpowers-style workflow: brainstorm the goal, clarify scope and non-goals, write an implementation plan, identify tests first, implement incrementally, run validation, and review the diff before handoff.
+Follow the approved Superpowers plan. Implement incrementally, run the relevant tests, and report validation evidence.
 ```
 
-For smaller tasks:
+Local fallbacks in this repo:
 
-```text
-Use AGENTS.md and .agents/skills/agentic-lightweight-loop/SKILL.md.
-Clarify the behavior change and validation plan, then make the smallest safe patch and review the diff.
-```
+| Superpowers Need | Local Codex Skill |
+|---|---|
+| Lightweight task loop | `.agents/skills/agentic-lightweight-loop/SKILL.md` |
+| Plan-first feature work | `.agents/skills/agentic-formal-feature/SKILL.md` |
+| Review before handoff | `.agents/skills/agentic-role-review/SKILL.md` |
+| Framework/API hardening | `.agents/skills/framework-contract-review/SKILL.md` |
 
-## Claude Code Invocation
+## Notes
 
-Use the mirrored Claude-compatible skills when you want the same shape in Claude Code:
-
-```text
-Use .claude/skills/agentic-formal-feature/SKILL.md and AGENTS.md.
-Follow a Superpowers-style plan-first and TDD workflow.
-```
-
-## Outputs To Preserve
-
-- clarified behavior change
-- non-goals
-- implementation plan
-- test plan
-- validation evidence
-- review findings or residual risk
-
-## Guardrails
-
-- Do not add ceremony after the risk is already clear and low.
-- Do not skip tests just because the plan is well written.
-- Keep the implementation plan tied to files and commands in the actual repo.
-- Update `AGENTS.md` or a skill only when the lesson is reusable.
+- Install and run real Superpowers commands in Claude Code.
+- Use Codex for repo scan, implementation, tests, and second opinions.
+- Do not document Superpowers commands as Codex commands unless a Codex-native plugin exists.

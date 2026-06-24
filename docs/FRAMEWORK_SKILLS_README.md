@@ -1,51 +1,50 @@
 # Framework-Specific Custom Skills
 
-This guide documents how to add project or framework-specific skills on top of the generic workflow skills.
+Framework-specific custom skills are Codex/Claude skills you create for a particular framework, library, API surface, or internal platform. This is not a separate upstream product; it uses the skill systems provided by your coding agent.
 
-## Status In This Kit
+## Upstream / Product Sources
 
-The bundled skills are intentionally framework-agnostic:
+| Surface | Source |
+|---|---|
+| Codex skills docs | https://developers.openai.com/codex/skills |
+| Codex plugins docs | https://developers.openai.com/codex/plugins |
+| Open Agent Skills standard | https://agentskills.io |
 
-- `agentic-lightweight-loop`
-- `agentic-formal-feature`
-- `agentic-role-review`
-- `framework-contract-review`
+## Install
 
-Framework-specific skills should be added per project or packaged as a Codex plugin when they are reusable across projects.
-
-## When To Create A Custom Skill
-
-Create one when a framework has stable rules that agents repeatedly need:
-
-- public API compatibility policy
-- lifecycle/resource ownership model
-- plugin or extension-point constraints
-- supported version matrix
-- migration and deprecation process
-- error model and logging conventions
-- performance-sensitive hot paths
-- docs/examples that must stay runnable
-
-Do not create a skill for one-off task instructions.
-
-## Codex Skill Location
-
-Repo-local skill:
+Repo-local Codex skill:
 
 ```text
 .agents/skills/<framework>-contract-review/SKILL.md
 ```
 
-Personal skill:
+User-level Codex skill:
 
 ```text
 ~/.agents/skills/<framework>-contract-review/SKILL.md
 ```
 
-Claude Code compatibility mirror, if needed:
+Claude Code compatibility mirror when needed:
 
 ```text
 .claude/skills/<framework>-contract-review/SKILL.md
+```
+
+For reusable distribution, package the skill as a Codex plugin rather than copying folders manually.
+
+## Use
+
+Invoke explicitly in Codex:
+
+```text
+Use .agents/skills/<framework>-contract-review/SKILL.md and AGENTS.md.
+Review this plan/diff for framework contract risk. Findings first.
+```
+
+Or by skill name when your Codex surface has discovered it:
+
+```text
+Use the <framework>-contract-review skill. Review this public API change for compatibility, lifecycle, performance, security, docs, test matrix, and release readiness.
 ```
 
 ## Minimal Skill Template
@@ -58,7 +57,7 @@ description: Use for <framework> public API, lifecycle, compatibility, performan
 
 Read AGENTS.md and the nearest subsystem guidance first.
 
-For this framework, review:
+Review:
 1. API contract and compatibility
 2. lifecycle, cancellation, cleanup, and concurrency
 3. error model and diagnostics
@@ -71,16 +70,8 @@ For this framework, review:
 Report findings first, ordered by severity, with file/line references when possible.
 ```
 
-## Invocation
+## Notes
 
-```text
-Use .agents/skills/<framework>-contract-review/SKILL.md and AGENTS.md.
-Review this plan/diff for framework contract risk. Findings first.
-```
-
-## Guardrails
-
-- Keep each skill focused.
-- Prefer references to repo docs over duplicating large policy text.
-- Include concrete commands only when they are stable for that project.
-- Mirror to `.claude/skills` only if Claude Code users need the same workflow.
+- Create a custom skill only when the rules are reused across tasks.
+- Keep large references in separate files and link them from `SKILL.md`.
+- Prefer project docs over duplicating long framework policy in the skill.

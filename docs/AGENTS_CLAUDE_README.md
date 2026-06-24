@@ -1,53 +1,55 @@
 # Repo AGENTS.md / CLAUDE.md Guidance
 
-This guide documents the durable repo instruction layer.
+`AGENTS.md` and `CLAUDE.md` are durable instruction files for coding agents. They are not one installable product, but they are real agent configuration surfaces.
 
-## Files
+## Upstream / Product Sources
 
-| File | Purpose |
+| Surface | Source |
 |---|---|
-| `AGENTS.md` | Shared coding-agent rules, workflows, tool routing, review lenses, and verification expectations |
-| `CLAUDE.md` | Claude Code entrypoint that imports or points to shared repo guidance |
-| `.codex/AGENTS.md` | Codex-specific lightweight notes, when needed |
-| `.claude/AGENTIC_WORKFLOW.md` | Operating guide for prompts, stack layers, and handoffs |
+| OpenAI Codex `AGENTS.md` guidance | https://developers.openai.com/codex/customization |
+| AGENTS.md convention | https://agents.md |
+| Claude Code memory / `CLAUDE.md` docs | https://docs.anthropic.com/en/docs/claude-code/memory |
 
-## Scope Rules
+## Install
 
-Use `AGENTS.md` for durable instructions that should apply to everyone working in the repo. Use nested `AGENTS.md` files only when a subtree has different commands, conventions, or risks.
+There is no package install. Add files to the repo:
 
-Use prompt/thread context for one-off task constraints. Do not put temporary task details into `AGENTS.md`.
+```text
+AGENTS.md
+CLAUDE.md
+.codex/AGENTS.md       # optional Codex-specific local notes
+.claude/README.md      # optional Claude orientation
+```
 
-## What Belongs In AGENTS.md
+Copy this kit's portable files into a project:
 
-- build, test, lint, and validation commands
-- architecture boundaries
-- coding conventions
-- public API compatibility rules
-- security and secrets handling rules
-- review expectations
-- known generated files or files not to edit
-- how to update reusable skills or docs
+```bash
+cp AGENTS.md CLAUDE.md SKILL_CATALOG.md /path/to/project/
+cp .codex/AGENTS.md /path/to/project/.codex/
+cp .claude/README.md /path/to/project/.claude/
+```
 
-## What Belongs In CLAUDE.md
+## Use
 
-- Claude Code entrypoint guidance
-- links to shared `AGENTS.md`
-- Claude-specific slash-command or plugin notes
-- references to `.claude/AGENTIC_WORKFLOW.md`
-
-Keep `CLAUDE.md` thin when possible. The shared rules should live in `AGENTS.md`.
-
-## Codex Usage
-
-Codex reads relevant `AGENTS.md` guidance. Start Codex from the project root so repo guidance and `.agents/skills` are discoverable.
+Codex: start from the project root so Codex discovers `AGENTS.md` and `.agents/skills`.
 
 ```text
 Follow AGENTS.md. Before editing, read the nearest subsystem guidance and identify the validation commands for this change.
 ```
 
-## Guardrails
+Claude Code: start from the project root. `CLAUDE.md` should point Claude to shared repo guidance and any Claude-only plugin notes.
 
-- Nearest repo guidance wins for files under its subtree.
-- Do not duplicate long policies between `AGENTS.md`, `CLAUDE.md`, and workflow guides.
-- Keep repo guidance factual and stable.
-- Put volatile tool install details in dedicated docs instead of `AGENTS.md`.
+## What Belongs Where
+
+| File | Use For |
+|---|---|
+| `AGENTS.md` | Stable repo rules, commands, tests, architecture boundaries, review expectations |
+| nested `AGENTS.md` | Subtree-specific rules that override root guidance |
+| `CLAUDE.md` | Claude Code entrypoint and Claude-specific plugin/slash-command notes |
+| `.codex/AGENTS.md` | Codex-specific lightweight guidance when needed |
+
+## Notes
+
+- Put durable repo policy in `AGENTS.md`, not in prompts.
+- Keep `CLAUDE.md` thin and tool-specific.
+- Do not duplicate large policy blocks across both files.

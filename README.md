@@ -12,7 +12,7 @@ CLAUDE.md                       # Claude Code entrypoint that imports AGENTS.md
 SKILL_CATALOG.md                # explicit inventory of bundled and external skills
 docs/README.md                  # index of dedicated stack-layer guides
 docs/*_README.md               # dedicated stack-layer guides
-.claude/AGENTIC_WORKFLOW.md     # canonical commands, prompts, and workflow guide
+docs/AGENTIC_WORKFLOW.md        # canonical commands, prompts, and workflow guide
 .claude/README.md               # short Claude Code orientation
 assets/two-agent-framework-loop.svg    # lifecycle diagram asset
 .agents/skills/*/SKILL.md       # bundled Codex-native skills
@@ -29,7 +29,7 @@ cp AGENTS.md CLAUDE.md SKILL_CATALOG.md /path/to/project/
 mkdir -p /path/to/project/.agents /path/to/project/.claude /path/to/project/.codex /path/to/project/assets
 cp -R docs /path/to/project/
 cp assets/two-agent-framework-loop.svg /path/to/project/assets/
-cp .claude/AGENTIC_WORKFLOW.md .claude/README.md /path/to/project/.claude/
+cp .claude/README.md /path/to/project/.claude/
 cp -R .agents/skills /path/to/project/.agents/
 cp -R .claude/skills /path/to/project/.claude/
 cp .codex/AGENTS.md /path/to/project/.codex/
@@ -41,7 +41,7 @@ Then add project-specific guidance in `/path/to/project/AGENTS.md` or a nested s
 
 Use this loop for framework or library work where design quality, compatibility, testing, and release readiness matter. The diagram is role-based: Agent 1 handles interactive design and review; Agent 2 handles repo-grounded implementation and validation.
 
-Default Claude + Codex mapping: Agent 1 = Claude Code, Agent 2 = Codex. The generic stage matrix, skill mapping, prompts, and fallback instructions live in `.claude/AGENTIC_WORKFLOW.md`.
+Default Claude + Codex mapping: Agent 1 = Claude Code, Agent 2 = Codex. The generic stage matrix, skill mapping, prompts, and fallback instructions live in `docs/AGENTIC_WORKFLOW.md`.
 
 ![Two-Agent Framework Development Loop](assets/two-agent-framework-loop.svg)
 
@@ -60,7 +60,7 @@ See `SKILL_CATALOG.md` for the full inventory and external install notes.
 
 ## Usage Docs
 
-- `.claude/AGENTIC_WORKFLOW.md`: canonical operating guide for the two-agent loop, gstack-style review, fallback prompts, and Claude/Codex handoffs.
+- `docs/AGENTIC_WORKFLOW.md`: canonical operating guide for the two-agent loop, gstack-style review, fallback prompts, and Claude/Codex handoffs.
 - `docs/README.md`: index for all dedicated stack-layer guides.
 - `docs/DAE_README.md`: DAE/ATDD install, Claude Code boundaries, Codex handoff prompts, and Codex-native porting options.
 - `docs/*_README.md`: dedicated guides for Superpowers, ponytail, gstack, GSD Core, repo guidance, framework skills, review/security tooling, and docs lookup.

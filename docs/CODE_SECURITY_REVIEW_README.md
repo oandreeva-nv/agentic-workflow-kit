@@ -1,56 +1,80 @@
 # Code Review And Security Review Tooling
 
-This guide documents the review and security layer.
+This guide covers actual review/security products that can be used with this workflow. It also shows local fallbacks when those products are unavailable.
 
-## Status In This Kit
+## Products / Sources
 
-This repo bundles review methodology skills, not scanners. Use real scanners or plugins when installed; otherwise use local review lenses and clearly report that no scanner ran.
-
-| Need | Tooling |
+| Product | Source |
 |---|---|
-| General code review | Codex `/review`, manual review, or `agentic-role-review` |
-| Framework/API review | `framework-contract-review` |
-| Security review | gstack `/cso`, Codex Security plugin if installed, or local security lens |
-| QA/test matrix | gstack `/qa` or `agentic-role-review` QA lens |
-| Release readiness | gstack `/ship` or `agentic-role-review` release lens |
+| gstack review, QA, CSO, benchmark, ship commands | https://github.com/garrytan/gstack |
+| Codex code review docs | https://developers.openai.com/codex/review |
+| Codex Security docs | https://developers.openai.com/codex/security |
+| Codex skills docs | https://developers.openai.com/codex/skills |
 
-## Codex Review Invocation
+## Install
+
+### gstack
+
+Install gstack from its upstream repo:
+
+```bash
+git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git ~/gstack
+cd ~/gstack && ./setup
+```
+
+For Codex specifically:
+
+```bash
+cd ~/gstack && ./setup --host codex
+```
+
+For Claude Code, see `docs/GSTACK_README.md` or the upstream gstack README.
+
+### Codex Review / Security
+
+Codex review and Codex Security are OpenAI product surfaces, not repo-local skills in this kit. Use the current Codex UI/CLI/plugin instructions from official docs for your environment.
+
+## Use
+
+gstack review commands:
 
 ```text
-Use .agents/skills/agentic-role-review/SKILL.md and AGENTS.md.
+/review
+/qa
+/qa-only
+/cso
+/benchmark
+/ship
+/land-and-deploy
+```
+
+Codex review fallback prompt:
+
+```text
 Review this diff. Findings first, ordered by severity, with file/line references. Cover correctness, compatibility, lifecycle/concurrency, performance, security, tests, docs, and release risk.
 ```
 
-Framework-specific review:
+Local skill fallback:
+
+```text
+Use .agents/skills/agentic-role-review/SKILL.md and AGENTS.md.
+Review this diff across product, architecture, devex, API compatibility, lifecycle/concurrency, performance, security, QA, docs, test matrix, and release readiness. Findings first.
+```
+
+Framework/API-specific fallback:
 
 ```text
 Use .agents/skills/framework-contract-review/SKILL.md and AGENTS.md.
 Review this framework/API change for public contract, migration, lifecycle, performance, security, docs, test matrix, and release readiness. Findings first.
 ```
 
-Security-focused review:
+## Evidence Rule
 
-```text
-Review this diff for security and abuse risk. Focus on untrusted input, file/network/process boundaries, authz/authn, secrets, dependency risk, extension points, logging of sensitive data, and unsafe defaults. Findings first.
-```
+Separate manual review from tool evidence. Say exactly what ran:
 
-## Scanner Rule
+- `gstack /cso` ran or did not run
+- Codex Security scan ran or did not run
+- dependency audit ran or did not run
+- tests/linters/benchmarks ran or did not run
 
-If a real scanner, Codex Security plugin, SAST tool, dependency audit, or secret scan is not installed or not run, say that explicitly. Do not imply tool coverage from manual review.
-
-## Evidence To Report
-
-- commands run
-- files reviewed
-- findings and severity
-- tests or scans passed/failed
-- unverified risk areas
-- next action
-
-## Guardrails
-
-- Findings first.
-- Do not bury security issues in a summary.
-- Avoid speculative vulnerabilities; tie findings to code paths.
-- Separate manual review from automated scanner evidence.
-- Re-run relevant validation after fixes.
+Do not imply scanner coverage from a manual prompt review.

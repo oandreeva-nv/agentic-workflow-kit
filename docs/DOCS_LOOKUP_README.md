@@ -1,55 +1,80 @@
 # Context7 Or Equivalent Docs Lookup
 
-This guide documents how to handle external or fast-changing documentation.
+Context7 is a documentation lookup platform by Upstash. It provides up-to-date, version-specific library documentation for coding agents through either a CLI + skills mode or an MCP server mode.
 
-## Status In This Kit
+## Upstream
 
-Context7 is not bundled here. Use Context7, official vendor docs MCP servers, local docs, or another approved docs lookup tool in the agent/editor environment. For OpenAI product questions, use official OpenAI docs or the OpenAI docs skill when available.
+| Resource | Link |
+|---|---|
+| GitHub repo | https://github.com/upstash/context7 |
+| Website | https://context7.com |
+| npm MCP package | https://www.npmjs.com/package/@upstash/context7-mcp |
+| npm CLI package | https://www.npmjs.com/package/ctx7 |
 
-## When To Use Docs Lookup
+## Install
 
-Use docs lookup before relying on memory for:
+The upstream README recommends a free API key for higher rate limits and requires Node.js 18 or newer for the CLI.
 
-- external APIs and SDKs
-- recently changing frameworks or libraries
-- install commands
-- configuration syntax
-- security guidance
-- cloud service behavior
-- product or model availability
-- deprecations and migrations
-
-## Codex Prompt
-
-```text
-Before implementing, look up the current official docs for <library/tool> using the configured docs lookup tool. Prefer official documentation over blog posts. Summarize only the relevant API/configuration facts, cite the source, then apply the repo's existing patterns.
+```bash
+npx ctx7 setup
 ```
 
-If no docs lookup tool is configured:
+The setup flow authenticates via OAuth, generates an API key, and installs the appropriate skill. It can install either CLI + Skills mode or MCP mode. You can target specific agents with flags such as:
 
-```text
-State that no docs lookup tool is configured. Use local repo docs first. If internet access is required for current external docs, ask for approval or provide the exact docs page the user should verify.
+```bash
+npx ctx7 setup --claude
+npx ctx7 setup --cursor
+npx ctx7 setup --opencode
 ```
 
-## Source Priority
+Manual MCP server URL:
 
-1. Repo source and local docs.
-2. Official vendor docs through Context7, MCP, or equivalent.
-3. Official vendor website.
-4. Primary source code or release notes.
-5. Secondary articles only when primary sources are unavailable, and label them as secondary.
+```text
+https://mcp.context7.com/mcp
+```
 
-## What To Capture
+Pass your API key via the `CONTEXT7_API_KEY` header when configuring manually.
 
-- exact version or date-sensitive assumption
-- API names and options used
-- deprecation or migration note
-- source link
-- how the docs fact changes the implementation or validation plan
+Remove generated setup:
 
-## Guardrails
+```bash
+npx ctx7 remove
+```
 
-- Do not cite memory for changing APIs.
-- Do not paste large chunks of docs into project files.
-- Do not add dependencies based only on examples without checking repo constraints.
-- Keep docs lookup scoped to the task.
+## Use
+
+Prompt style:
+
+```text
+Create a Next.js middleware that checks for a valid JWT in cookies and redirects unauthenticated users to /login. use context7
+```
+
+Use an exact library ID when known:
+
+```text
+Implement basic authentication with Supabase. use library /supabase/supabase for API and docs.
+```
+
+CLI commands:
+
+```bash
+ctx7 library <name> <query>
+ctx7 docs <libraryId> <query>
+```
+
+MCP tools listed upstream:
+
+| Tool | Purpose |
+|---|---|
+| `resolve-library-id` | Resolve a library name into a Context7-compatible library ID |
+| `query-docs` | Retrieve docs for a Context7 library ID and query |
+
+## When To Use
+
+Use Context7 or equivalent official-docs lookup before relying on memory for external APIs, SDKs, package configuration, cloud services, framework migrations, or recently changed behavior.
+
+## Notes
+
+- Context7 docs are community-contributed; use judgment for security-sensitive work.
+- Prefer official vendor docs when a product has a first-party docs MCP or official manual.
+- For OpenAI product questions, use official OpenAI docs / Codex manual first.

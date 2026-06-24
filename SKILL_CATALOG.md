@@ -20,12 +20,12 @@ These are not bundled here. This repo provides prompts, command mappings, and lo
 | External System | Status In This Repo | How To Use |
 |---|---|---|
 | Disciplined Agentic Engineering / ATDD | Install separately as Claude Code plugins; Codex uses handoff prompts or local skills | See `docs/DAE_README.md` |
-| gstack | Optional external package/plugin; not bundled here | See `docs/GSTACK_README.md` |
-| Superpowers | Install separately if you use that pack | See `docs/SUPERPOWERS_README.md` |
-| GSD Core / Get Shit Done | Install separately if you use that pack | See `docs/GSD_CORE_README.md` |
+| gstack | Install separately from upstream; not bundled here | See `docs/GSTACK_README.md` |
+| Superpowers | Install separately from upstream; not bundled here | See `docs/SUPERPOWERS_README.md` |
+| GSD Core / Get Shit Done | Install separately from upstream; not bundled here | See `docs/GSD_CORE_README.md` |
 | Context Engineering Kit | Install separately if you use that pack | Use `agentic-formal-feature` and `agentic-role-review` as local substitutes |
-| Context7 or official-doc lookup | Configure in your agent/editor environment | See `docs/DOCS_LOOKUP_README.md` |
-| ponytail | Not bundled; no verified install source is encoded here | See `docs/PONYTAIL_README.md` |
+| Context7 or official-doc lookup | Install/configure separately; not bundled here | See `docs/DOCS_LOOKUP_README.md` |
+| ponytail | Install separately from upstream; not bundled here | See `docs/PONYTAIL_README.md` |
 | `openai/skills` | Deprecated upstream catalog; still useful as a source for curated local installs | Prefer current plugin examples for distribution; use `$skill-installer` only for local experimentation |
 
 ## Install Into A Project
@@ -37,7 +37,7 @@ cp AGENTS.md CLAUDE.md SKILL_CATALOG.md /path/to/project/
 mkdir -p /path/to/project/.agents /path/to/project/.claude /path/to/project/.codex
 cp -R docs /path/to/project/
 cp -R .agents/skills /path/to/project/.agents/
-cp -R .claude/AGENTIC_WORKFLOW.md .claude/README.md .claude/skills /path/to/project/.claude/
+cp -R .claude/README.md .claude/skills /path/to/project/.claude/
 cp .codex/AGENTS.md /path/to/project/.codex/
 ```
 
