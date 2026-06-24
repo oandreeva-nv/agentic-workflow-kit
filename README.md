@@ -41,7 +41,7 @@ Then add project-specific guidance in `/path/to/project/AGENTS.md` or a nested s
 
 Use this loop for framework or library work where design quality, compatibility, testing, and release readiness matter. The diagram is role-based: Agent 1 handles interactive design and review; Agent 2 handles repo-grounded implementation and validation.
 
-Default Claude + Codex mapping: Agent 1 = Claude Code, Agent 2 = Codex. The stack layers, full procedure, prompts, command mapping, and fallback instructions live in `.claude/AGENTIC_WORKFLOW.md`.
+Default Claude + Codex mapping: Agent 1 = Claude Code, Agent 2 = Codex. The generic stage matrix, skill mapping, prompts, and fallback instructions live in `.claude/AGENTIC_WORKFLOW.md`.
 
 ![Two-Agent Framework Development Loop](assets/two-agent-framework-loop.svg)
 

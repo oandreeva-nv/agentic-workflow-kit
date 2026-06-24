@@ -27,52 +27,48 @@ Use these as layers, not as a mandatory sequence for every patch:
 4. **Review and ship layer**: gstack-style product, architecture, devex, QA, security, benchmark, and release reviews.
 5. **Docs lookup**: Context7 or equivalent official-docs lookup for external APIs and fast-changing libraries.
 
-## Recommended Flow: Two-Agent Framework Development Loop
+## Recommended Flow: Generic Two-Agent Development Loop
 
-Use this loop for framework or library work where design quality, compatibility, testing, and release readiness matter. It is role-based: Agent 1 leads design, challenge, reviews, and decisions; Agent 2 scans the repo, implements, tests, and returns validation evidence.
+Use this loop for framework, library, or infrastructure work where design quality, compatibility, testing, and release readiness matter. It is role-based, not tool-specific: Agent 1 leads design, challenge, reviews, and decisions; Agent 2 scans the repo, implements, tests, and returns validation evidence.
 
 Default Claude + Codex mapping: Agent 1 = Claude Code, Agent 2 = Codex. You can swap the actual tools as long as the roles stay clear.
 
-Phases: **Design -> Review -> Implement -> Validate -> Ship -> Reflect**
+Phases: **Discover -> Specify -> Plan -> Build -> Review -> Validate -> Ship -> Reflect**
 
 ![Two-Agent Framework Development Loop](../assets/two-agent-framework-loop.svg)
 
-Text flow summary:
-
-1. **[Agent 1]** Superpowers brainstorming -> generate `/idea-hours`.
-2. **[Agent 2]** Repo/project scan.
-3. **[Agent 1]** DAE / framework spec.
-4. **[Agent 2]** Validate spec against repo.
-5. **[Agent 1]** gstack `/plan-eng-review` and `/plan-devex-review`.
-6. **[Agent 1]** Superpowers write-plans.
-7. **[Agent 2]** Translate plan to test status.
-8. **[Agent 2]** TDD implementation step by step.
-9. **[Agent 1]** Review diff / checkpoint.
-10. **[Agent 2]** Continue implementation.
-11. **[Agent 1]** Adversarial framework review.
-12. **[Agent 2]** Fix review findings and run validation.
-13. **[Agent 1]** Compatibility / performance / security / docs review.
-14. **[Agent 2]** Final patch summary and validation evidence.
-15. **[Agent 1]** gstack `/ship` or Superpowers finish branch.
-16. **[Agent 2]** Reflect and update `AGENTS.md` / skills.
-
 Legend:
 
-- Left column = Agent 1: interactive design, challenge, reviews, and decisions.
-- Right column = Agent 2: repo-grounded execution, tests, validation, and patch evidence.
-- Arrows = handoffs between the two agents.
+- Agent 1 = interactive design, challenge, review, and decision surface.
+- Agent 2 = repo-grounded execution, tests, validation, and evidence surface.
+- External tools are optional. If unavailable, use the bundled local fallback skills.
 
-Tool mapping:
+### Stage And Skill Matrix
 
-| Flow Step | Preferred Tooling | Bundled Fallback |
-|---|---|---|
-| 1-2 Discover / Scope | Superpowers brainstorming, `/idea-hours`, Agent 2 repo scan | `agentic-lightweight-loop` |
-| 3-4 Spec / Validate | DAE / framework spec, Agent 2 spec validation | `agentic-formal-feature` |
-| 5-6 Plan Review | gstack `/plan-eng-review`, `/plan-devex-review`, Superpowers write-plans | `agentic-formal-feature` plus `agentic-role-review` |
-| 7-10 Implement / Checkpoint | Agent 2 TDD execution, Agent 1 checkpoint review | `agentic-lightweight-loop` or `agentic-formal-feature` |
-| 11-12 Adversarial Review | Agent 1 adversarial framework review, Agent 2 fixes | `framework-contract-review` plus `agentic-role-review` |
-| 13-14 Final Validation | compatibility/perf/security/docs review, Agent 2 evidence | `framework-contract-review` |
-| 15-16 Ship / Learn | gstack `/ship`, Superpowers finish branch, Agent 2 reflection | `agentic-role-review`; update `AGENTS.md` / skills when reusable lessons emerge |
+| Stage | Generic Goal | Agent 1 Role | Agent 2 Role | Skills / Tools To Use |
+|---|---|---|---|---|
+| 1. Discover / Scope | Frame the problem, outcome, non-goals, risk, and user value | Lead brainstorming and product challenge | Inspect repo context if needed | `agentic-lightweight-loop`; Superpowers brainstorming; GSD context setup; gstack `/office-hours`; Ponytail only if installed |
+| 2. Repo Context | Map touched files, tests, commands, conventions, and constraints | Ask for gaps or constraints that matter | Scan source, tests, docs, and nearest guidance | `agentic-lightweight-loop`; `AGENTS.md`; `docs/AGENTS_CLAUDE_README.md`; Context7/docs lookup when external APIs are involved |
+| 3. Contract / Spec | Define Ready contract, acceptance criteria, API expectations, and non-goals | Own product/API decisions and acceptance criteria | Validate whether the contract fits current code | `agentic-formal-feature`; DAE/ATDD; GSD Core; framework-specific custom skills; `framework-contract-review` for public APIs |
+| 4. Spec Validation | Check the spec against architecture, tests, migration paths, and known constraints | Decide whether to revise scope or proceed | Report blockers, missing tests, and feasibility gaps | `agentic-formal-feature`; `framework-contract-review`; docs lookup; code/security review tooling when risk appears early |
+| 5. Plan | Produce an implementation sequence, test matrix, rollback/migration story, and validation plan | Challenge architecture, devex, compatibility, and risk | Translate the plan into files, tests, and execution steps | `agentic-formal-feature`; Superpowers write-plans; gstack `/autoplan`, `/plan-eng-review`, `/plan-devex-review`; `agentic-role-review` |
+| 6. Build | Implement incrementally while preserving the approved contract | Stay available for checkpoint decisions | Edit code, add/update tests, and keep diffs narrow | `agentic-lightweight-loop` for small work; `agentic-formal-feature` for risky work; framework-specific custom skills; docs lookup for external APIs |
+| 7. Checkpoint Review | Review partial diff before the change becomes large | Review scope, design, API shape, and risk | Summarize diff, test status, blockers, and next patch | `agentic-role-review`; `framework-contract-review`; gstack `/review`; Codex `/review` where available |
+| 8. Fix / Continue | Resolve checkpoint findings and continue implementation | Decide tradeoffs when findings conflict | Fix findings and rerun targeted validation | `agentic-formal-feature`; `framework-contract-review`; code/security review tooling for risky fixes |
+| 9. Adversarial Review | Challenge the finished diff across product, architecture, devex, API, lifecycle, security, performance, tests, docs, and release risk | Lead adversarial review and acceptance decision | Provide diff, evidence, and suspected weak spots | `agentic-role-review`; `framework-contract-review`; gstack `/qa`, `/cso`, `/benchmark`; `docs/CODE_SECURITY_REVIEW_README.md` |
+| 10. Final Validation | Run final tests, scans, benchmarks, docs checks, and compatibility checks appropriate to risk | Decide whether validation is enough to ship | Run commands and produce evidence with failures called out | `framework-contract-review`; `agentic-role-review`; DAE/ATDD mutation step if available; docs-as-tests; security scanners if installed |
+| 11. Ship Readiness | Prepare release notes, migration notes, PR summary, residual-risk callout, and deploy/merge decision | Own ship/no-ship decision | Produce final patch summary and validation evidence | `agentic-role-review`; gstack `/ship`, `/land-and-deploy`; Superpowers finish branch; DAE session summary |
+| 12. Reflect / Learn | Capture reusable lessons in guidance, docs, or skills | Decide what should become durable guidance | Update `AGENTS.md`, docs, or skills only when reusable | `docs/AGENTS_CLAUDE_README.md`; `docs/FRAMEWORK_SKILLS_README.md`; `skill-creator` if creating a new Codex skill |
+
+### Skill Selection Rules
+
+- Use `agentic-lightweight-loop` when the task is routine and the risk is local.
+- Use `agentic-formal-feature` when the task needs a contract, acceptance criteria, TDD, or a reviewable plan.
+- Use `agentic-role-review` when you need gstack-style product, architecture, devex, QA, security, performance, docs, and release lenses.
+- Use `framework-contract-review` when public API, compatibility, lifecycle/concurrency, performance, docs, test matrix, or release risk matters.
+- Use DAE/ATDD for high-risk features that justify checkpoint artifacts and acceptance-test discipline.
+- Use Context7 or equivalent docs lookup when external APIs, SDKs, or fast-changing behavior are involved.
+- Use framework-specific custom skills when a project has durable framework rules beyond the generic skills.
 
 ## Default Prompts
 

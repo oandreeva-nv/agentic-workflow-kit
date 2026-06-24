@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1350" height="1120" viewBox="0 0 1350 1120" role="img" aria-labelledby="title desc">
   <title id="title">Two-Agent Framework Development Loop</title>
-  <desc id="desc">Lifecycle diagram showing a design and review agent handing work to an implementation and validation agent across discover, spec, plan review, implementation, adversarial review, final validation, ship, and reflect phases.</desc>
+  <desc id="desc">Lifecycle diagram showing a design and review agent handing work to an implementation and validation agent across discover, specify, plan, build, review, validate, ship, and reflect phases.</desc>
   <defs>
     <style>
       .bg { fill: #f7f8fb; }
@@ -30,7 +30,7 @@
 
   <rect class="bg" x="0" y="0" width="1350" height="1120" rx="0" />
   <text class="title" x="40" y="58">Two-Agent Framework Development Loop</text>
-  <text class="subtitle" x="40" y="84">Design - Review - Implement - Validate - Ship - Reflect</text>
+  <text class="subtitle" x="40" y="84">Discover - Specify - Plan - Build - Review - Validate - Ship - Reflect</text>
 
   <rect class="phase-gutter" x="40" y="118" width="170" height="930" rx="8" />
   <rect class="lane" x="235" y="118" width="470" height="930" rx="8" />
@@ -49,9 +49,9 @@
   <line class="phase-line" x1="40" y1="935" x2="1270" y2="935" />
 
   <text class="phase" x="58" y="222">DISCOVER / SCOPE</text>
-  <text class="phase" x="58" y="337">SPEC / VALIDATE</text>
-  <text class="phase" x="58" y="522">PLAN REVIEW</text>
-  <text class="phase" x="58" y="647">IMPLEMENT / CHECKPOINT</text>
+  <text class="phase" x="58" y="337">SPECIFY / VALIDATE</text>
+  <text class="phase" x="58" y="522">PLAN</text>
+  <text class="phase" x="58" y="647">BUILD / CHECKPOINT</text>
   <text class="phase" x="58" y="787">ADVERSARIAL REVIEW</text>
   <text class="phase" x="58" y="917">FINAL VALIDATION</text>
   <text class="phase" x="58" y="1030">SHIP / LEARN</text>
@@ -60,98 +60,98 @@
   <g id="step-1">
     <rect class="agent1-card" x="295" y="190" width="350" height="76" rx="8" />
     <circle class="badge-agent1" cx="322" cy="218" r="15" /><text class="step" x="322" y="222" text-anchor="middle">1</text>
-    <text class="card-title" x="348" y="213">Brainstorming / discovery</text>
-    <text class="card-body" x="348" y="236">generate idea notes</text>
+    <text class="card-title" x="348" y="213">Problem framing</text>
+    <text class="card-body" x="348" y="236">outcome, scope, non-goals</text>
   </g>
   <g id="step-2">
     <rect class="agent2-card" x="855" y="190" width="350" height="76" rx="8" />
     <circle class="badge-agent2" cx="882" cy="218" r="15" /><text class="step" x="882" y="222" text-anchor="middle">2</text>
-    <text class="card-title" x="908" y="213">Repo/project scan</text>
-    <text class="card-body" x="908" y="236">map files, tests, constraints</text>
+    <text class="card-title" x="908" y="213">Repo context scan</text>
+    <text class="card-body" x="908" y="236">files, tests, constraints</text>
   </g>
   <g id="step-3">
     <rect class="agent1-card" x="295" y="305" width="350" height="76" rx="8" />
     <circle class="badge-agent1" cx="322" cy="333" r="15" /><text class="step" x="322" y="337" text-anchor="middle">3</text>
-    <text class="card-title" x="348" y="328">Formal framework spec</text>
-    <text class="card-body" x="348" y="351">ready contract, ACs, Gherkin</text>
+    <text class="card-title" x="348" y="328">Contract and acceptance</text>
+    <text class="card-body" x="348" y="351">API, ACs, success criteria</text>
   </g>
   <g id="step-4">
     <rect class="agent2-card" x="855" y="305" width="350" height="76" rx="8" />
     <circle class="badge-agent2" cx="882" cy="333" r="15" /><text class="step" x="882" y="337" text-anchor="middle">4</text>
-    <text class="card-title" x="908" y="328">Validate spec against repo</text>
-    <text class="card-body" x="908" y="351">check fit, gaps, test surface</text>
+    <text class="card-title" x="908" y="328">Validate contract fit</text>
+    <text class="card-body" x="908" y="351">gaps, tests, feasibility</text>
   </g>
   <g id="step-5">
     <rect class="agent1-card" x="295" y="425" width="350" height="76" rx="8" />
     <circle class="badge-agent1" cx="322" cy="453" r="15" /><text class="step" x="322" y="457" text-anchor="middle">5</text>
-    <text class="card-title" x="348" y="448">Plan reviews</text>
+    <text class="card-title" x="348" y="448">Risk and plan review</text>
     <text class="card-body" x="348" y="471">architecture, devex, risk</text>
   </g>
   <g id="step-6">
     <rect class="agent1-card" x="295" y="515" width="350" height="76" rx="8" />
     <circle class="badge-agent1" cx="322" cy="543" r="15" /><text class="step" x="322" y="547" text-anchor="middle">6</text>
-    <text class="card-title" x="348" y="538">Write implementation plan</text>
-    <text class="card-body" x="348" y="561">reviewable implementation sequence</text>
+    <text class="card-title" x="348" y="538">Implementation plan</text>
+    <text class="card-body" x="348" y="561">steps, tests, rollback</text>
   </g>
   <g id="step-7">
     <rect class="agent2-card" x="855" y="425" width="350" height="76" rx="8" />
     <circle class="badge-agent2" cx="882" cy="453" r="15" /><text class="step" x="882" y="457" text-anchor="middle">7</text>
-    <text class="card-title" x="908" y="448">Translate plan to test status</text>
-    <text class="card-body" x="908" y="471">red/green targets, validation matrix</text>
+    <text class="card-title" x="908" y="448">Test matrix setup</text>
+    <text class="card-body" x="908" y="471">targets and commands</text>
   </g>
   <g id="step-8">
     <rect class="agent2-card" x="855" y="515" width="350" height="76" rx="8" />
     <circle class="badge-agent2" cx="882" cy="543" r="15" /><text class="step" x="882" y="547" text-anchor="middle">8</text>
-    <text class="card-title" x="908" y="538">TDD implementation</text>
-    <text class="card-body" x="908" y="561">incremental patch steps</text>
+    <text class="card-title" x="908" y="538">Incremental build</text>
+    <text class="card-body" x="908" y="561">narrow patches and tests</text>
   </g>
   <g id="step-9">
     <rect class="agent1-card" x="295" y="635" width="350" height="76" rx="8" />
     <circle class="badge-agent1" cx="322" cy="663" r="15" /><text class="step" x="322" y="667" text-anchor="middle">9</text>
-    <text class="card-title" x="348" y="658">Review diff / checkpoint</text>
-    <text class="card-body" x="348" y="681">scope, risk, implementation quality</text>
+    <text class="card-title" x="348" y="658">Checkpoint review</text>
+    <text class="card-body" x="348" y="681">scope, API, risk, quality</text>
   </g>
   <g id="step-10">
     <rect class="agent2-card" x="855" y="635" width="350" height="76" rx="8" />
     <circle class="badge-agent2" cx="882" cy="663" r="15" /><text class="step" x="882" y="667" text-anchor="middle">10</text>
-    <text class="card-title" x="908" y="658">Continue implementation</text>
-    <text class="card-body" x="908" y="681">address checkpoint findings</text>
+    <text class="card-title" x="908" y="658">Fix and continue</text>
+    <text class="card-body" x="908" y="681">resolve findings, rerun tests</text>
   </g>
   <g id="step-11">
     <rect class="agent1-card" x="295" y="755" width="350" height="76" rx="8" />
     <circle class="badge-agent1" cx="322" cy="783" r="15" /><text class="step" x="322" y="787" text-anchor="middle">11</text>
-    <text class="card-title" x="348" y="778">Adversarial framework review</text>
-    <text class="card-body" x="348" y="801">API, compat, lifecycle, abuse</text>
+    <text class="card-title" x="348" y="778">Adversarial review</text>
+    <text class="card-body" x="348" y="801">API, lifecycle, security</text>
   </g>
   <g id="step-12">
     <rect class="agent2-card" x="855" y="755" width="350" height="76" rx="8" />
     <circle class="badge-agent2" cx="882" cy="783" r="15" /><text class="step" x="882" y="787" text-anchor="middle">12</text>
-    <text class="card-title" x="908" y="778">Fix findings and validate</text>
-    <text class="card-body" x="908" y="801">tests, linters, benchmarks as needed</text>
+    <text class="card-title" x="908" y="778">Fix findings</text>
+    <text class="card-body" x="908" y="801">validate after fixes</text>
   </g>
   <g id="step-13">
     <rect class="agent1-card" x="295" y="875" width="350" height="76" rx="8" />
     <circle class="badge-agent1" cx="322" cy="903" r="15" /><text class="step" x="322" y="907" text-anchor="middle">13</text>
-    <text class="card-title" x="348" y="898">Compatibility / perf / security</text>
-    <text class="card-body" x="348" y="921">docs and release review</text>
+    <text class="card-title" x="348" y="898">Final risk review</text>
+    <text class="card-body" x="348" y="921">compat, perf, security, docs</text>
   </g>
   <g id="step-14">
     <rect class="agent2-card" x="855" y="875" width="350" height="76" rx="8" />
     <circle class="badge-agent2" cx="882" cy="903" r="15" /><text class="step" x="882" y="907" text-anchor="middle">14</text>
-    <text class="card-title" x="908" y="898">Final patch summary</text>
-    <text class="card-body" x="908" y="921">validation evidence and residual risk</text>
+    <text class="card-title" x="908" y="898">Validation evidence</text>
+    <text class="card-body" x="908" y="921">commands, results, risks</text>
   </g>
   <g id="step-15">
     <rect class="ship-card" x="295" y="995" width="350" height="76" rx="8" />
     <circle class="badge-ship" cx="322" cy="1023" r="15" /><text class="step" x="322" y="1027" text-anchor="middle">15</text>
-    <text class="card-title" x="348" y="1018">Ship readiness</text>
-    <text class="card-body" x="348" y="1041">ship review or finish branch</text>
+    <text class="card-title" x="348" y="1018">Ship decision</text>
+    <text class="card-body" x="348" y="1041">release notes, migration, PR</text>
   </g>
   <g id="step-16">
     <rect class="ship-card" x="855" y="995" width="350" height="76" rx="8" />
     <circle class="badge-ship" cx="882" cy="1023" r="15" /><text class="step" x="882" y="1027" text-anchor="middle">16</text>
-    <text class="card-title" x="908" y="1018">Reflect and update</text>
-    <text class="card-body" x="908" y="1041">AGENTS.md / skills when reusable</text>
+    <text class="card-title" x="908" y="1018">Reflect and improve</text>
+    <text class="card-body" x="908" y="1041">guidance and skills if reusable</text>
   </g>
 
   <!-- Arrows -->
